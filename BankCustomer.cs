@@ -14,18 +14,14 @@ namespace TeamDataDragons
         public List<Account> Accounts = new List<Account>();
 
         //Properties for BankCustomer
-        public double BankLoan { get; set; }
         public bool LockedOut { get; set; }
 
-        public float Balance { get; set; }
-
         //Constructor
-        public BankCustomer(string name, int id, int personalnumber, bool isadmin, double bankloan, bool lockedout, float balance) 
+        public BankCustomer(string name, int id, int personalnumber, bool isadmin, bool lockedout) 
             : base(name, id, personalnumber, isadmin)
         {
-            BankLoan = bankloan;
             LockedOut = lockedout;
-            Balance = balance;
+            
         }
 
         //Override method to print customer info.
@@ -42,7 +38,7 @@ namespace TeamDataDragons
             {
                 Console.WriteLine("*** Bank Customer Menu ***");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
-                    "3. Transfer money to other customers\n4. Open new account\n5.View transfer log\n6. Log out");
+                    "3. Transfer money to other customers\n4. Open new account\n5.View transfer log\n6.My Loans\n7.Apply for a loan\n8. Log out");
 
                 Console.WriteLine("Select option (1-6):");
                 int choice = int.Parse(Console.ReadLine());
@@ -59,12 +55,18 @@ namespace TeamDataDragons
                         //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
-                        //AddNewAccount();
+                        //AddNewAccount(); //Välj SEK eller Dollar
                         break;
                     case 5:
-                        TransferLog();
+                        //TransferLog();
                         break;
                     case 6:
+                        //Myloans();
+                        break;
+                    case 7:
+                        //ApplyLoan();
+                        break;
+                    case 8:
                         Environment.Exit(0);
                         break;
                     default:
@@ -73,23 +75,6 @@ namespace TeamDataDragons
 
                 }
             }
-        }
-        //Method to display transfer log.
-        public void TransferLog()
-        {
-            Console.WriteLine("*** Transfer Log ***");
-
-            Console.WriteLine($"Bank Accounts: ");
-            //Loops through and displays info for each account.
-            foreach (var account in Accounts)
-            {
-                Console.WriteLine($"Account Number: {account.AccountNumber}, Balance: {account.Balance}");
-            }
-        }
-        //Method to check balance.
-        public void CheckBalance()
-        {
-            Console.WriteLine($"Your current balance in account {Accounts} is {Balance}");
         }
     }
 }
