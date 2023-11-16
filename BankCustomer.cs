@@ -13,21 +13,19 @@ namespace TeamDataDragons
         //List to store bank accounts.
         public List<Account> Accounts = new List<Account>();
 
-        //Properties for BankCustomer
-        public bool LockedOut { get; set; }
+        
 
         //Constructor
-        public BankCustomer(string name, int id, int personalnumber, bool isadmin, bool lockedout) 
-            : base(name, id, personalnumber, isadmin)
+        public BankCustomer(string username, string password, string name, int personalnumber, bool isadmin = false)
+            : base(username, password, name, personalnumber, isadmin)
         {
-            LockedOut = lockedout;
             
         }
 
         //Override method to print customer info.
         public override void PrintInfo()
         {
-            Console.WriteLine($"Name {Name}\nID: {ID}\nPersonal Number: {PersonalNumber}\nIs Admin: {IsAdmin}");
+            Console.WriteLine($"Name {Name}\nID: {ID}\nPersonal Number: {PersonalNumber}");
             
         }
 
