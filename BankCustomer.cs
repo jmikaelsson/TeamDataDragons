@@ -31,10 +31,8 @@ namespace TeamDataDragons
         //Override method to print customer info.
         public override void PrintInfo()
         {
-            Console.WriteLine($"Name {Name}");
-            Console.WriteLine($"ID: {ID}");
-            Console.WriteLine($"Personal Number: {PersonalNumber}");
-            Console.WriteLine($"Is Admin: {IsAdmin}");
+            Console.WriteLine($"Name {Name}\nID: {ID}\nPersonal Number: {PersonalNumber}\nIs Admin: {IsAdmin}");
+            
         }
 
         //Method to display the customer menu.
@@ -52,22 +50,25 @@ namespace TeamDataDragons
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"{Accounts}, {CheckBalance}");
+                        //List<Account> Accounts();
                         break;
                     case 2:
-                        Console.WriteLine($"");
+                        //TransferMoneyBetWeenAccounts();
                         break;
                     case 3:
-                        Console.WriteLine();
+                        //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
-                        Console.WriteLine();
+                        //AddNewAccount();
                         break;
                     case 5:
                         TransferLog();
                         break;
                     case 6:
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, try again.");
                         break;
 
                 }
@@ -88,7 +89,7 @@ namespace TeamDataDragons
         //Method to check balance.
         public void CheckBalance()
         {
-            Console.WriteLine($"Your current balance in account {Accounts} is ");
+            Console.WriteLine($"Your current balance in account {Accounts} is {Balance}");
         }
     }
 }
