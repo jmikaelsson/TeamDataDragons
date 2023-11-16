@@ -13,8 +13,6 @@ namespace TeamDataDragons
         //List to store bank accounts.
         public List<Account> Accounts = new List<Account>();
 
-        
-
         //Constructor
         public BankCustomer(string username, string password, string name, int personalnumber, bool isadmin = false)
             : base(username, password, name, personalnumber, isadmin)
