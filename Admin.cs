@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    public class Admin
-    { 
+    public class Admin : AbstractUser
+    {
+
+        public Admin(string name, int id, int personalnumber, bool isadmin)
+            : base (name, id, personalnumber, isadmin)
+        {
+
+        }
 
         //Create Lists of administrators and customers
-        private List<string> administrators = new List<string>();
-        private List<string> customers = new List<string>();
+        public List<string> administrators = new List<string>();
+        public List<string> customers = new List<string>();
 
         //Method to add administrators
         public void AddAdministrator(string administratorName)
@@ -26,7 +32,7 @@ namespace TeamDataDragons
         }
 
         //Method to get administrators
-        public List<string> GetAdministrators()
+        public List<string> GetAdministrators(string administratorName, string adminPassword)
         {
             return administrators;
         }
@@ -38,19 +44,20 @@ namespace TeamDataDragons
         }
 
         //Method for unlock user
-        public void UnlockUser(string userName)
+        public void UnlockUser(string userName, string password)
         {
-            if (administrators.Contains(userName))
-            {
-                Console.WriteLine("");
-            }
+            Console.WriteLine("Unlock User");
+        }
 
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"Name: {Name}, ID: {ID}, Personalnumber: {PersonalNumber}");
         }
 
         //Method for the admin menu
-        private void AdministratorMenu()
+        public void AdministratorMenu()
         {
-            Admin adminManager = new Admin();
+            List<LogInManager> bankUsers = new List<LogInManager>();
 
             while (true)
             {
@@ -66,14 +73,17 @@ namespace TeamDataDragons
                 switch (adminSelection)
                 {
                     case "1":
-                        Console.WriteLine("Enter administrator name: ");
+                        Console.WriteLine("Enter a administrator name: ");
                         string administratorName = Console.ReadLine();
-                        adminManager.AddAdministrator(administratorName);
+                        Console.WriteLine("Enter a password");
+                        string adminPassword = Console.ReadLine();
+                        LogInManager adminManager = new LogInManager(administratorName, adminPassword);
+                        bankUsers.Add(adminManager);
                         Console.WriteLine("Administrator added!");
                         break;
                     case "2":
                         Console.WriteLine("Administrators:");
-                        foreach (var admin in adminManager.GetAdministrators())
+                        foreach (var admin in bankUsers.GetAdministrators())
                         {
                             Console.WriteLine(admin);
                         }
@@ -81,12 +91,15 @@ namespace TeamDataDragons
                     case "3":
                         Console.Write("Enter customer name: ");
                         string customerName = Console.ReadLine();
-                        adminManager.AddCustomer(customerName);
+                        Console.WriteLine("Enter a password: ");
+                        string customerPassword = Console.ReadLine();
+                        LogInManager customers = new LogInManager(customerName, customerPassword);
+                        bankUsers.Add(customers);
                         Console.WriteLine("Customer added!");
                         break;
                     case "4":
                         Console.WriteLine("Customers:");
-                        foreach (var customer in adminManager.GetCustomers())
+                        foreach (var customer in bankUsers.GetCustomers())
                         {
                             Console.WriteLine(customer);
                         }
