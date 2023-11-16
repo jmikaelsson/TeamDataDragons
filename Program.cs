@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+
             Bank bank = new Bank();
 
             // Lägg till nya konton
