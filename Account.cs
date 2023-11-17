@@ -22,7 +22,7 @@ namespace TeamDataDragons
         // Metod för att beräkna ränta och visa resultatet
         public void Interest()
         {
-            // Implementera din logik för att beräkna och visa ränta här
+            //Logik för att beräkna och visa ränta här
             double interestRate = 0.05; // Exempelräntesats på 5%
             double interest = Balance * interestRate;
 
@@ -32,7 +32,7 @@ namespace TeamDataDragons
         // Metod för att öppna ett nytt konto
         public void AddNewAccount()
         {
-            // Implementera din logik för att öppna ett nytt konto här
+            // Logik för att öppna ett nytt konto här
             Console.WriteLine("Enter the initial balance for the new account:");
             double initialBalance = double.Parse(Console.ReadLine());
 
