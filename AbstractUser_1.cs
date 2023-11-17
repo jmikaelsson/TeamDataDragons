@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    internal class LogInManager 
+    internal class AbstractUser 
     {
         private int Attempts { get; set; }
         private int MaxAttempt { get; set; }
         private List<AbstractUser> BankUsers { get; set; }
 
-        public LogInManager(List<AbstractUser> bankUsers, int maxAttemts = 3)
+        public AbstractUser(List<AbstractUser> bankUsers, int maxAttemts = 3)
         {
             Attempts = 0;
             MaxAttempt = maxAttemts;

@@ -10,7 +10,7 @@ namespace TeamDataDragons
 {
     internal class App
     {
-        private LogInManager LogInManager { get; set; }
+        private AbstractUser LogInManager { get; set; }
         private List<AbstractUser> BankUsers { get; set; }
 
         public App()
@@ -26,7 +26,7 @@ namespace TeamDataDragons
         static void LogInPage()
         {
             
-                LogInManager logInCheck = new LogInManager();
+                AbstractUser logInCheck = new LogInManager();
                          
         }
 
