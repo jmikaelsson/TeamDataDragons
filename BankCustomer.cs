@@ -11,7 +11,7 @@ namespace TeamDataDragons
     public class BankCustomer : AbstractUser
     {
         //List to store bank accounts.
-        public List< jn7bun Account> Accounts = new List<Account>();
+        public List<Account> Accounts = new List<Account>();
 
         //Constructor
         public BankCustomer(string username, string password, string name, int personalnumber, bool isadmin = false)
