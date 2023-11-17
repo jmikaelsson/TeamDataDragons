@@ -20,31 +20,10 @@ namespace TeamDataDragons
             BankUsers = bankUsers;
 
         }
-        //public bool LogInUser(string inputUserName, string Password)
-        //{
-
-        //    var user =  BankUsers.Find(user => user.UserName == inpuUserName && user.Password == inputPassword);
-        //    bool ListContain = bankUsers.Contains(logInCostumer);
-        //    if (ListContain)
-        //    {
-        //        if (true)
-        //        {
-
-        //        }
-        //        else
-        //        {
-
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-       
-        //}
+        
         public AbstractUser LogInUser(string inputUserName, string inputPassword)
         {
-            return BankUsers.Find(user => user.UserName == inputUserName && user.Password == inputPassword); 
+            return BankUsers.Find(user => user.UserName == inputUserName && user.PassWord == inputPassword); 
 
         }
 
@@ -53,19 +32,19 @@ namespace TeamDataDragons
             Attempts++;
             
             Console.Write("Användarnamn: ");
-            string inptUserName = Console.ReadLine();
+            string inputUserName = Console.ReadLine();
             Console.Write("Lösenord: ");
             string inputPassword = Console.ReadLine();
-            var user = LogInUser(inptUserName, inputPassword);
+            var user = LogInUser(inputUserName, inputPassword);
             if (user != null)
             {
                 if(user is Admin admin)
                 {
-                    //admin.
+                    admin.AdministratorMenu();
                 }
-                if (user is BankCostumer costumer)
+                if (user is BankCustomer customer)
                 {
-                    //costumer
+                    customer.CustomerMenu();
                 }
             } 
             else
