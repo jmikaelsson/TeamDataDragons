@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    public class Currency
+    public class Currency : UpdateCurrencyExchange
     {
         public double Dollar { get; set; }
         public double Sek { get; set; }
-        public double ExchangeRate;
+        
 
         public Currency(double sek, double dollar)
         {
@@ -18,11 +18,7 @@ namespace TeamDataDragons
             Sek = sek;
             UpdateExchangeRate();
         }
-        public void UpdateExchangeRate()  // updates the exchange rate
-        {
-            Console.WriteLine("Enter the updated exchange rate: ");
-            ExchangeRate = double.Parse(Console.ReadLine());
-        }
+        
         public void ExchangeToUSD(double amountInSek)
         {
             Sek -= amountInSek;
