@@ -17,12 +17,12 @@ namespace TeamDataDragons
 
         }
 
-        public override void PrintInfo()
+        public override void PrintInfo() //Override the method PrintInfo() 
         {
             Console.WriteLine($"Name: {Name}, ID: {ID}, Personalnumber: {PersonalNumber}");
         }
 
-
+        //Creates a method to add admin which is saved in the list of bankUsers from abstractuser
         public void AddAdmin(List<AbstractUser> bankUsers)
         {
             Console.WriteLine("Enter a administrator username: ");
@@ -44,6 +44,7 @@ namespace TeamDataDragons
             Console.WriteLine("Administrator added!");
         }
 
+        //Creates a method to add customer which is saved in the list of bankUsers from abstractuser
         public void AddCustomer(List<AbstractUser> bankUsers)
         {
             Console.Write("Enter customer name: ");
@@ -53,11 +54,11 @@ namespace TeamDataDragons
             Console.WriteLine("Enter administartors name: ");
             string customerFirstLastName = Console.ReadLine();
             Console.WriteLine("Enter personalnumber: ");
-            bool customerWrongInput = !int.TryParse(Console.ReadLine(), out int customerPersonNumber);
+            bool customerWrongInput =! int.TryParse(Console.ReadLine(), out int customerPersonNumber);
             while (customerWrongInput)
             {
                 Console.WriteLine("Wrong input. Try Again.");
-                customerWrongInput = !int.TryParse(Console.ReadLine(), out customerPersonNumber);
+                customerWrongInput =! int.TryParse(Console.ReadLine(), out customerPersonNumber);
             }
             Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
             bankUsers.Add(newCustomer);
@@ -66,11 +67,13 @@ namespace TeamDataDragons
         //Method for the admin menu
         public void AdministratorMenu(List<AbstractUser> bankUsers)
         {
+            PrintInfo();
 
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("*** Administrator Menu ***");
+                Console.WriteLine("*** Administrator Menu ***\n" +
+                    "Select option (1-4)");
                 Console.WriteLine("1. Add a new administrator\n2. Add a new customer\n3. Update Exchange Rate\n4. Log out");
 
                 //Create a variable for the administrators choice
@@ -86,7 +89,8 @@ namespace TeamDataDragons
                         this.AddCustomer(bankUsers);
                         break;
                     case "3":
-                        Currency.UpdateExchangeRate();
+                        UpdateCurrencyExchange updatedExchange = new();
+                        updatedExchange.UpdateExchangeRate();
                         break;
                     case "4":
                         Environment.Exit(0);
