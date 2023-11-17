@@ -86,7 +86,7 @@ namespace TeamDataDragons
                         this.AddCustomer(bankUsers);
                         break;
                     case "3":
-                        Console.WriteLine("Exchange rate");
+                        Currency.UpdateExchangeRate();
                         break;
                     case "4":
                         Environment.Exit(0);
