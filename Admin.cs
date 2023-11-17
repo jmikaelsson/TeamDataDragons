@@ -10,43 +10,11 @@ namespace TeamDataDragons
     public class Admin : AbstractUser
     {
 
-        public Admin(string name, int id, int personalnumber, bool isadmin)
-            : base (name, id, personalnumber, isadmin)
+
+        public Admin(string username, string password, string name, int personalnumber, bool isadmin = true)
+            : base(username, password, name, personalnumber, isadmin)
         {
 
-        }
-
-        //Create Lists of administrators and customers
-        public List<string> administrators = new List<string>();
-        public List<string> customers = new List<string>();
-
-        //Method to add administrators
-        public void AddAdministrator(string administratorName)
-        {
-            administrators.Add(administratorName);
-        }
-        //Method to add customers
-        public void AddCustomer(string custumerName)
-        {
-            customers.Add(custumerName);
-        }
-
-        //Method to get administrators
-        public List<string> GetAdministrators(string administratorName, string adminPassword)
-        {
-            return administrators;
-        }
-        
-        //Method to get customers
-        public List<string> GetCustomers()
-        {
-            return customers;
-        }
-
-        //Method for unlock user
-        public void UnlockUser(string userName, string password)
-        {
-            Console.WriteLine("Unlock User");
         }
 
         public override void PrintInfo()
@@ -54,17 +22,56 @@ namespace TeamDataDragons
             Console.WriteLine($"Name: {Name}, ID: {ID}, Personalnumber: {PersonalNumber}");
         }
 
-        //Method for the admin menu
-        public void AdministratorMenu()
+
+        public void AddAdmin(List<AbstractUser> bankUsers)
         {
-            List<LogInManager> bankUsers = new List<LogInManager>();
+            Console.WriteLine("Enter a administrator username: ");
+            string administratorName = Console.ReadLine();
+            Console.WriteLine("Enter a password");
+            string adminPassword = Console.ReadLine();
+            Console.WriteLine("Enter administartors name: ");
+            string adminFirstLastName = Console.ReadLine();
+            Console.WriteLine("Enter personalnumber: ");
+            bool adminWrongInput = !int.TryParse(Console.ReadLine(), out int adminPersonNumber);
+            while (adminWrongInput)
+            {
+                Console.WriteLine("Wrong input. Try Again.");
+                adminWrongInput = !int.TryParse(Console.ReadLine(), out adminPersonNumber);
+            }
+
+            Admin newAdmin = new Admin(administratorName, adminPassword, adminFirstLastName, adminPersonNumber, true);
+            bankUsers.Add(newAdmin);
+            Console.WriteLine("Administrator added!");
+        }
+
+        public void AddCustomer(List<AbstractUser> bankUsers)
+        {
+            Console.Write("Enter customer name: ");
+            string customerName = Console.ReadLine();
+            Console.WriteLine("Enter a password: ");
+            string customerPassword = Console.ReadLine();
+            Console.WriteLine("Enter administartors name: ");
+            string customerFirstLastName = Console.ReadLine();
+            Console.WriteLine("Enter personalnumber: ");
+            bool customerWrongInput = !int.TryParse(Console.ReadLine(), out int customerPersonNumber);
+            while (customerWrongInput)
+            {
+                Console.WriteLine("Wrong input. Try Again.");
+                customerWrongInput = !int.TryParse(Console.ReadLine(), out customerPersonNumber);
+            }
+            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
+            bankUsers.Add(newCustomer);
+            Console.WriteLine("Customer added!");
+        }
+        //Method for the admin menu
+        public void AdministratorMenu(List<AbstractUser> bankUsers)
+        {
 
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("*** Administrator Menu ***");
-                Console.WriteLine("1. Add a new administrator\n2. View administrators information\n" +
-                    "3. Add a new customer\n4. View customers information\n 5. Update Exchange Rate\n6. Unlock User\n7. Log out");
+                Console.WriteLine("1. Add a new administrator\n2. Add a new customer\n3. Update Exchange Rate\n4. Log out");
 
                 //Create a variable for the administrators choice
                 string adminSelection = Console.ReadLine();
@@ -73,44 +80,15 @@ namespace TeamDataDragons
                 switch (adminSelection)
                 {
                     case "1":
-                        Console.WriteLine("Enter a administrator name: ");
-                        string administratorName = Console.ReadLine();
-                        Console.WriteLine("Enter a password");
-                        string adminPassword = Console.ReadLine();
-                        LogInManager adminManager = new LogInManager(administratorName, adminPassword);
-                        bankUsers.Add(adminManager);
-                        Console.WriteLine("Administrator added!");
+                        this.AddAdmin(bankUsers);
                         break;
                     case "2":
-                        Console.WriteLine("Administrators:");
-                        foreach (var admin in bankUsers.GetAdministrators())
-                        {
-                            Console.WriteLine(admin);
-                        }
+                        this.AddCustomer(bankUsers);
                         break;
                     case "3":
-                        Console.Write("Enter customer name: ");
-                        string customerName = Console.ReadLine();
-                        Console.WriteLine("Enter a password: ");
-                        string customerPassword = Console.ReadLine();
-                        LogInManager customers = new LogInManager(customerName, customerPassword);
-                        bankUsers.Add(customers);
-                        Console.WriteLine("Customer added!");
-                        break;
-                    case "4":
-                        Console.WriteLine("Customers:");
-                        foreach (var customer in bankUsers.GetCustomers())
-                        {
-                            Console.WriteLine(customer);
-                        }
-                        break;
-                    case "5":
                         Console.WriteLine("Exchange rate");
                         break;
-                    case "6":
-                        Console.WriteLine("Unlock user");
-                        break;
-                    case "7":
+                    case "4":
                         Environment.Exit(0);
                         break;
                     default:
@@ -118,7 +96,7 @@ namespace TeamDataDragons
                         break;
                 }
 
-            } 
+            }
 
         }
 
