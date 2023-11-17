@@ -51,7 +51,7 @@ namespace TeamDataDragons
                         //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
-                        //AddNewAccount(); //Välj SEK eller Dollar
+                        AddNewAccount(); //Välj SEK eller Dollar
                         break;
                     case 5:
                         //TransferLog();
