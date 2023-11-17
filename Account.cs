@@ -11,7 +11,6 @@ namespace TeamDataDragons
         SEK,
         Dollar
     }
-
     public class Account
     {
         // Bankkontoattribut
@@ -32,6 +31,7 @@ namespace TeamDataDragons
         {
             double interestRate = 0.05; // Exempelräntesats på 5%
             double interest = Balance * interestRate;
+
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
@@ -77,11 +77,11 @@ namespace TeamDataDragons
             // Set the balance based on the chosen currency
             if (currencyType == CurrencyType.SEK)
             {
-                UserCurrency.Sek = initialBalance;
+                Balance = initialBalance;
             }
             else
             {
-                UserCurrency.Dollar = initialBalance;
+                Balance = initialBalance / UserCurrency.ExchangeRate;
             }
         }
 
