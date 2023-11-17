@@ -17,19 +17,19 @@ namespace TeamDataDragons
         {
             List<AbstractUser> bankUsers = new()
             {
-                new Admin(),
-                new BankCustomer(),
+                new Admin("Test", 1, 1, true),
+                new BankCustomer("Test", "abc123", "Test Teston", 2000000),
             };
             BankUsers = bankUsers;
             LogInManager = new(BankUsers);
         }
         static void LogInPage()
         {
-            
-                LogInManager logInCheck = new LogInManager();
-                         
+            LogInManager logInCheck = new LogInManager();
+            logInCheck.TryToLogin();
+
         }
 
         
-    }
+ 
 }
