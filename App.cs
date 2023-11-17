@@ -17,7 +17,11 @@ namespace TeamDataDragons
         {
             BankUsers = new()
             {
-                new Admin("Test", 1, 1, true),
+                new Admin("Josefin", "12345", "Josefin Mikaelsson", 950810, true),
+                new Admin("Viktoria", "12345", "Viktora Wallström", 000000, true),
+                new Admin("Jana", "12345", "Jana Johansson", 000000, true),
+                new Admin("Mohamed", "12345", "Mohamed Mohamud", 000000, true),
+                new Admin("Morgan", "12354", "Morgan Westin", 000000, true),
                 new BankCustomer("Test", "abc123", "Test Teston", 2000000),
             };
             LogInManager = new(BankUsers);

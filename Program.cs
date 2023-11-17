@@ -5,7 +5,8 @@
         static void Main(string[] args)
         {
 
-            
+            App appStart = new App();
+            appStart.LogInPage();
 
 
             Bank bank = new Bank();
