@@ -12,6 +12,7 @@ namespace TeamDataDragons
     {
         //List to store bank accounts.
         public List<Account> Accounts = new List<Account>();
+        public List<Loan> loans = new List<Loan>();
 
         //Constructor
         public BankCustomer(string username, string password, string name, int personalnumber, bool isadmin = false)
@@ -27,22 +28,33 @@ namespace TeamDataDragons
             
         }
 
+        public void CheckBalance()
+        {
+            foreach(var Account in Accounts)
+            {
+                Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
+            }
+        }
+
         //Method to display the customer menu.
+
         public void CustomerMenu()
         {
+            PrintInfo();
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("*** Bank Customer Menu ***");
+                Console.WriteLine("Select option (1-8):");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
-                    "3. Transfer money to other customers\n4. Open new account\n5.View transfer log\n6.My Loans\n7.Apply for a loan\n8. Log out");
+                    "3. Transfer money to other customers\n4. Open new account\n5. View transfer log\n6. My Loans\n7. Apply for a loan\n8. Log out");
 
-                Console.WriteLine("Select option (1-6):");
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
-                        //List<Account> Accounts();
+                        CheckBalance();
                         break;
                     case 2:
                         //TransferMoneyBetWeenAccounts();
@@ -51,26 +63,25 @@ namespace TeamDataDragons
                         //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
-                        AddNewAccount(); //Välj SEK eller Dollar
+                        Account.AddNewAccount();
                         break;
                     case 5:
                         //TransferLog();
                         break;
                     case 6:
-                        //Myloans();
+                        Loan.CheckLoan();
                         break;
                     case 7:
-                        //ApplyLoan();
+                        Loan.ApplyForALoan();
                         break;
                     case 8:
-                        Environment.Exit(0);
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
                         break;
 
                 }
-            }
-        }
+            } 
+        } 
     }
 }
