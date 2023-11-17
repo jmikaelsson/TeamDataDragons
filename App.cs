@@ -15,21 +15,23 @@ namespace TeamDataDragons
 
         public App()
         {
-            List<AbstractUser> bankUsers = new()
+            BankUsers = new()
             {
                 new Admin("Test", 1, 1, true),
                 new BankCustomer("Test", "abc123", "Test Teston", 2000000),
             };
-            BankUsers = bankUsers;
             LogInManager = new(BankUsers);
+
         }
-        static void LogInPage()
+        public void LogInPage()
         {
-            LogInManager logInCheck = new LogInManager();
-            logInCheck.TryToLogin();
+            LogInManager.TryToLogin();
 
         }
 
-        
- 
+
+
+
+
+    }
 }
