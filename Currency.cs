@@ -18,7 +18,7 @@ namespace TeamDataDragons
             Sek = sek;
             UpdateExchangeRate();
         }
-        private void UpdateExchangeRate()  // updates the exchange rate
+        public void UpdateExchangeRate()  // updates the exchange rate
         {
             Console.WriteLine("Enter the updated exchange rate: ");
             ExchangeRate = double.Parse(Console.ReadLine());
@@ -50,17 +50,16 @@ namespace TeamDataDragons
 
 
             Console.Write("to exchange SEK to USD tap 1 , to exchange USD to SEK tap 2? (1/2): ");
-            string response = Console.ReadLine();
+            int response = int.Parse(Console.ReadLine());
 
-            if (response.ToLower() == "2")
+            if (response == 2)
             {
                 Console.WriteLine("how much USD do you want to exchange to SEK?");
                 double exchangeAamount = double.Parse(Console.ReadLine());
                 userCurrency.ExchangeToSEK(exchangeAamount);   // User exchanges USD to SEK
             }
-            else if (response.ToLower() == "1")
+            else if (response == 1)
             {
-                Console.WriteLine("");
                 Console.WriteLine("how much SEK do you want to exchange to USD?");
                 double exchangeAamount = double.Parse(Console.ReadLine());
                 userCurrency.ExchangeToUSD(exchangeAamount);  // User exchanges SEK to USD
