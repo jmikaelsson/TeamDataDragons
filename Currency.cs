@@ -10,25 +10,34 @@ namespace TeamDataDragons
     {
         public double Dollar { get; set; }
         public double Sek { get; set; }
+        public double ExchangeRate;
+
         public Currency(double sek, double dollar)
         {
             Dollar = dollar;
             Sek = sek;
+            UpdateExchangeRate();
+        }
+        private void UpdateExchangeRate()  // updates the exchange rate
+        {
+            Console.WriteLine("Enter the updated exchange rate: ");
+            ExchangeRate = double.Parse(Console.ReadLine());
         }
         public void ExchangeToUSD(double amountInSek)
         {
             Sek -= amountInSek;
-            Dollar += amountInSek * 0.1;
-            Console.WriteLine($"Exchanged {amountInSek} SEK to {amountInSek * 0.1} USD");
+            Dollar += amountInSek / ExchangeRate;
+            Console.WriteLine($"Exchanged {amountInSek} SEK to {amountInSek / ExchangeRate} USD");
         }
 
         public void ExchangeToSEK(double amountInUSD)
         {
 
             Dollar -= amountInUSD;
-            Sek += amountInUSD * 10;
-            Console.WriteLine($"Exchanged {amountInUSD} Dollar to {amountInUSD * 10} SEK");
+            Sek += amountInUSD * ExchangeRate;
+            Console.WriteLine($"Exchanged {amountInUSD} Dollar to {amountInUSD * ExchangeRate} SEK");
         }
+       
 
         public void CurrencyRun()
         {
