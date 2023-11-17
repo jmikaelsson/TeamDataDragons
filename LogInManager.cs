@@ -29,27 +29,31 @@ namespace TeamDataDragons
 
         public void TryToLogin()
         {
-            Attempts++;
-            
-            Console.Write("Användarnamn: ");
-            string inputUserName = Console.ReadLine();
-            Console.Write("Lösenord: ");
-            string inputPassword = Console.ReadLine();
-            var user = LogInUser(inputUserName, inputPassword);
-            if (user != null)
+            while (Attempts <= MaxAttempt)
             {
-                if(user is Admin admin)
+                Console.Clear();
+                Attempts++;
+                Console.WriteLine("***Login***\n");
+                Console.Write("Username: ");
+                string inputUserName = Console.ReadLine();
+                Console.Write("Password: ");
+                string inputPassword = Console.ReadLine();
+                var user = LogInUser(inputUserName, inputPassword);
+                if (user != null)
                 {
-                    admin.AdministratorMenu();
+                    if (user is Admin admin)
+                    {
+                        admin.AdministratorMenu(BankUsers);
+                    }
+                    if (user is BankCustomer customer)
+                    {
+                        customer.CustomerMenu();
+                    }
                 }
-                if (user is BankCustomer customer)
+                else
                 {
-                    customer.CustomerMenu();
+                    Console.WriteLine("Username or password is incorrect!");
                 }
-            } 
-            else
-            {
-                Console.WriteLine("Fel användarnam eller lösenord!");
             }
 
         }
