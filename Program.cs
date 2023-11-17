@@ -9,15 +9,15 @@
             appStart.LogInPage();
 
 
-            Bank bank = new Bank();
+            //Bank bank = new Bank();
 
-            // Lägg till nya konton
-            bank.AddNewAccount(1000);
-            bank.AddNewAccount(500);
+            //// Lägg till nya konton
+            //bank.AddNewAccount(1000);
+            //bank.AddNewAccount(500);
 
-            // Gör några överföringar och loggar resultaten
-            bank.accounts[0].TransferMoney(bank.accounts[1], 200);
-            bank.TransferLog();
+            //// Gör några överföringar och loggar resultaten
+            //bank.accounts[0].TransferMoney(bank.accounts[1], 200);
+            //bank.TransferLog();
 
             Console.ReadLine();
 
