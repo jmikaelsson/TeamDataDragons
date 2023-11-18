@@ -18,7 +18,7 @@ namespace TeamDataDragons
         public string BankAccountNumber { get; set; }
         public Currency UserCurrency { get; private set; }
 
-        // Konstruktor
+        // Constructor
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType)
         {
             BankAccountNumber = bankAccountNumber;
@@ -26,26 +26,31 @@ namespace TeamDataDragons
             SetInitialBalance(initialBalance, currencyType);
         }
 
-        // Metod för att beräkna ränta och visa resultatet
+        // Method to calculate interest and display the result
         public void Interest()
         {
-            double interestRate = 0.05; // Exempelräntesats på 5%
+            double interestRate = 0.05; // Example interest rate of 5%
             double interest = Balance * interestRate;
 
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
-        // Metod för att öppna ett nytt konto
-        public void AddNewAccount()
+        // Public static method to add a new account
+        public static void AddNewAccount()
         {
             Console.WriteLine("Enter the initial balance for the new account:");
-            double initialBalance = double.Parse(Console.ReadLine());
+            double initialBalance;
+
+            while (!double.TryParse(Console.ReadLine(), out initialBalance))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid initial balance:");
+            }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
-            string currencyChoice = Console.ReadLine();
+            string currencyChoice = Console.ReadLine()?.ToLower() ?? "";
 
             CurrencyType chosenCurrency;
-            switch (currencyChoice.ToLower())
+            switch (currencyChoice)
             {
                 case "sek":
                     chosenCurrency = CurrencyType.SEK;
@@ -59,13 +64,11 @@ namespace TeamDataDragons
                     break;
             }
 
-            // Here the chosen currency is set to the initial balance
-            SetInitialBalance(initialBalance, chosenCurrency);
+            // Generate a new account with a random and unique account number
+            string generatedAccountNumber = GenerateRandomAccountNumber();
+            Account newAccount = new Account(generatedAccountNumber, initialBalance, chosenCurrency);
 
-            // Generate a unique 8-digit random bank account number
-            GenerateRandomAccountNumber();
-
-            Console.WriteLine($"New account {BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
         }
 
         // Helper method to set the initial balance based on the chosen currency
@@ -86,18 +89,27 @@ namespace TeamDataDragons
         }
 
         // Helper method to generate a unique 8-digit random bank account number
-        private void GenerateRandomAccountNumber()
+        private static HashSet<string> usedAccountNumbers = new HashSet<string>();
+
+        // Helper method to generate a unique 8-digit random bank account number
+        private static string GenerateRandomAccountNumber()
         {
             Random random = new Random();
-            bool isUnique = false;
+            string generatedAccountNumber;
 
-            while (!isUnique)
+            while (true)
             {
                 int randomNumber = random.Next(10000000, 99999999);
-                BankAccountNumber = randomNumber.ToString();
+                generatedAccountNumber = randomNumber.ToString();
 
-                isUnique = true;
+                if (!usedAccountNumbers.Contains(generatedAccountNumber))
+                {
+                    usedAccountNumbers.Add(generatedAccountNumber);
+                    break;
+                }
             }
+
+            return generatedAccountNumber;
         }
     }
 }
