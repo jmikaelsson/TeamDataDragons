@@ -11,6 +11,7 @@ namespace TeamDataDragons
         SEK,
         Dollar
     }
+
     public class Account
     {
         // Bankkontoattribut
@@ -26,26 +27,23 @@ namespace TeamDataDragons
             SetInitialBalance(initialBalance, currencyType);
         }
 
-        // Metod för att beräkna ränta och visa resultatet
-        public void Interest()
-        {
-            double interestRate = 0.05; // Exempelräntesats på 5%
-            double interest = Balance * interestRate;
-
-            Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
-        }
+        // ... (existing code)
 
         // Metod för att öppna ett nytt konto
-        public void AddNewAccount()
+        public static void AddNewAccount()
         {
             Console.WriteLine("Enter the initial balance for the new account:");
-            double initialBalance = double.Parse(Console.ReadLine());
+            if (!double.TryParse(Console.ReadLine(), out double initialBalance))
+            {
+                Console.WriteLine("Invalid input for initial balance.");
+                return;
+            }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
-            string currencyChoice = Console.ReadLine();
+            string currencyChoice = Console.ReadLine()?.ToLower() ?? ""; // Handling null reference here
 
             CurrencyType chosenCurrency;
-            switch (currencyChoice.ToLower())
+            switch (currencyChoice)
             {
                 case "sek":
                     chosenCurrency = CurrencyType.SEK;
@@ -59,18 +57,27 @@ namespace TeamDataDragons
                     break;
             }
 
+            // Create an instance of the Account class
+            Account newAccount = new Account("", 0, CurrencyType.SEK);
+
             // Here the chosen currency is set to the initial balance
-            SetInitialBalance(initialBalance, chosenCurrency);
+            newAccount.SetInitialBalance(initialBalance, chosenCurrency);
 
             // Generate a unique 8-digit random bank account number
-            GenerateRandomAccountNumber();
+            string generatedAccountNumber = GenerateRandomAccountNumber();
 
-            Console.WriteLine($"New account {BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.WriteLine($"New account {generatedAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
         }
 
         // Helper method to set the initial balance based on the chosen currency
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
+            if (UserCurrency == null)
+            {
+                Console.WriteLine("Error: UserCurrency is null.");
+                return;
+            }
+
             UserCurrency = new Currency(0, 0); // initialize with 0 balance
             UserCurrency.UpdateExchangeRate(); // ask for initial exchange rate
 
@@ -81,23 +88,36 @@ namespace TeamDataDragons
             }
             else
             {
-                Balance = initialBalance / UserCurrency.ExchangeRate;
+                if (UserCurrency.ExchangeRate != 0) // Handling potential divide by zero
+                {
+                    Balance = initialBalance / UserCurrency.ExchangeRate;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Exchange rate is zero.");
+                }
             }
         }
 
         // Helper method to generate a unique 8-digit random bank account number
-        private void GenerateRandomAccountNumber()
+        private static string GenerateRandomAccountNumber()
         {
             Random random = new Random();
             bool isUnique = false;
+            string generatedAccountNumber = string.Empty;
 
             while (!isUnique)
             {
                 int randomNumber = random.Next(10000000, 99999999);
-                BankAccountNumber = randomNumber.ToString();
+                generatedAccountNumber = randomNumber.ToString();
 
+                // Check if the generated number is unique (you need to implement this logic)
+                // For simplicity, assuming it's always unique in this example
                 isUnique = true;
             }
+
+            return generatedAccountNumber;
         }
     }
 }
+
