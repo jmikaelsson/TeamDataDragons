@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 
+
 namespace TeamDataDragons
 {
     public enum CurrencyType
@@ -70,8 +71,11 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
             {
                 Console.WriteLine("Invalid input for initial balance.");
+
                 // Return a default Account instance
+
                 return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
+
             }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
