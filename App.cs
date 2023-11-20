@@ -50,7 +50,9 @@ namespace TeamDataDragons
                     Console.WriteLine("Wrong input!");
                 }
                 Console.Clear();
+
             }
+
             
 
         }
