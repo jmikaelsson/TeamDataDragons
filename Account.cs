@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+
 namespace TeamDataDragons
 {
     public enum CurrencyType
@@ -11,6 +13,7 @@ namespace TeamDataDragons
         SEK,
         Dollar
     }
+
     public class Account
     {
         // Bankkontoattribut
@@ -31,12 +34,11 @@ namespace TeamDataDragons
         {
             double interestRate = 0.05; // Exempelräntesats på 5%
             double interest = Balance * interestRate;
-
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
         // Metod för att öppna ett nytt konto
-        public void AddNewAccount()
+        public static Account AddNewAccount()
         {
             Console.WriteLine("Enter the initial balance for the new account:");
             double initialBalance = double.Parse(Console.ReadLine());
@@ -60,12 +62,15 @@ namespace TeamDataDragons
             }
 
             // Here the chosen currency is set to the initial balance
-            SetInitialBalance(initialBalance, chosenCurrency);
+            var newAccount = new Account("", 0, CurrencyType.SEK);
+            newAccount.SetInitialBalance(initialBalance, chosenCurrency);
 
             // Generate a unique 8-digit random bank account number
-            GenerateRandomAccountNumber();
+            newAccount.GenerateRandomAccountNumber();
 
-            Console.WriteLine($"New account {BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+
+            return newAccount;
         }
 
         // Helper method to set the initial balance based on the chosen currency
@@ -77,11 +82,11 @@ namespace TeamDataDragons
             // Set the balance based on the chosen currency
             if (currencyType == CurrencyType.SEK)
             {
-                Balance = initialBalance;
+                UserCurrency.Sek = initialBalance;
             }
             else
             {
-                Balance = initialBalance / UserCurrency.ExchangeRate;
+                UserCurrency.Dollar = initialBalance;
             }
         }
 
