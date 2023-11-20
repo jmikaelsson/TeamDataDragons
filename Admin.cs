@@ -19,7 +19,7 @@ namespace TeamDataDragons
 
         public override void PrintInfo() //Override the method PrintInfo() 
         {
-            Console.WriteLine($"Name: {Name}, ID: {ID}, Personalnumber: {PersonalNumber}");
+            Console.WriteLine($"Name: {Name}, ID: {ID}");
         }
 
         //Creates a method to add admin which is saved in the list of bankUsers from abstractuser
@@ -29,7 +29,7 @@ namespace TeamDataDragons
             string administratorName = Console.ReadLine();
             Console.WriteLine("Enter a password");
             string adminPassword = Console.ReadLine();
-            Console.WriteLine("Enter administartors name: ");
+            Console.WriteLine("Enter first and last name: ");
             string adminFirstLastName = Console.ReadLine();
             Console.WriteLine("Enter personalnumber: ");
             bool adminWrongInput = !int.TryParse(Console.ReadLine(), out int adminPersonNumber);
@@ -39,9 +39,9 @@ namespace TeamDataDragons
                 adminWrongInput = !int.TryParse(Console.ReadLine(), out adminPersonNumber);
             }
 
-            Admin newAdmin = new Admin(administratorName, adminPassword, adminFirstLastName, adminPersonNumber, true);
-            bankUsers.Add(newAdmin);
+            Admin newAdmin = new Admin(administratorName, adminPassword, adminFirstLastName, adminPersonNumber);
             Console.WriteLine("Administrator added!");
+            bankUsers.Add(newAdmin);
         }
 
         //Creates a method to add customer which is saved in the list of bankUsers from abstractuser
@@ -51,26 +51,26 @@ namespace TeamDataDragons
             string customerName = Console.ReadLine();
             Console.WriteLine("Enter a password: ");
             string customerPassword = Console.ReadLine();
-            Console.WriteLine("Enter administartors name: ");
+            Console.WriteLine("Enter first and last name: ");
             string customerFirstLastName = Console.ReadLine();
             Console.WriteLine("Enter personalnumber: ");
-            bool customerWrongInput =! int.TryParse(Console.ReadLine(), out int customerPersonNumber);
+            bool customerWrongInput = !int.TryParse(Console.ReadLine(), out int customerPersonNumber);
             while (customerWrongInput)
             {
                 Console.WriteLine("Wrong input. Try Again.");
-                customerWrongInput =! int.TryParse(Console.ReadLine(), out customerPersonNumber);
+                customerWrongInput = !int.TryParse(Console.ReadLine(), out customerPersonNumber);
             }
-            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
+            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber);
             bankUsers.Add(newCustomer);
-            Console.WriteLine("Customer added!");
         }
         //Method for the admin menu
         public void AdministratorMenu(List<AbstractUser> bankUsers)
         {
-            PrintInfo();
 
             while (true)
             {
+                PrintInfo();
+
                 Console.Clear();
                 Console.WriteLine("*** Administrator Menu ***\n" +
                     "Select option (1-4)");
@@ -93,8 +93,7 @@ namespace TeamDataDragons
                         updatedExchange.UpdateExchangeRate();
                         break;
                     case "4":
-                        Environment.Exit(0);
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Invalid choice. Try again.");
                         break;

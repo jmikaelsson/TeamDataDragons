@@ -63,7 +63,11 @@ namespace TeamDataDragons
                         //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
+
+                        //AddNewAccount();  skriv Account.AddNewAccount() här det ska fungera nu
+
                         Account.AddNewAccount();
+
                         break;
                     case 5:
                         //TransferLog();

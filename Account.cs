@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+
 namespace TeamDataDragons
 {
     public enum CurrencyType
@@ -27,10 +29,23 @@ namespace TeamDataDragons
             SetInitialBalance(initialBalance, currencyType);
         }
 
+ 
         // ... (existing code)
 
         // Metod för att öppna ett nytt konto
         public static void AddNewAccount()
+
+        // Metod för att beräkna ränta och visa resultatet
+        public void Interest()
+        {
+            double interestRate = 0.05; // Exempelräntesats på 5%
+            double interest = Balance * interestRate;
+            Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
+        }
+
+        // Metod för att öppna ett nytt konto
+        public static Account AddNewAccount()
+
         {
             Console.WriteLine("Enter the initial balance for the new account:");
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
@@ -61,12 +76,24 @@ namespace TeamDataDragons
             Account newAccount = new Account("", 0, CurrencyType.SEK);
 
             // Here the chosen currency is set to the initial balance
+
             newAccount.SetInitialBalance(initialBalance, chosenCurrency);
 
             // Generate a unique 8-digit random bank account number
             string generatedAccountNumber = GenerateRandomAccountNumber();
 
             Console.WriteLine($"New account {generatedAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+
+            var newAccount = new Account("", 0, CurrencyType.SEK);
+            newAccount.SetInitialBalance(initialBalance, chosenCurrency);
+
+            // Generate a unique 8-digit random bank account number
+            newAccount.GenerateRandomAccountNumber();
+
+            Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+
+            return newAccount;
+
         }
 
         // Helper method to set the initial balance based on the chosen currency
@@ -84,10 +111,11 @@ namespace TeamDataDragons
             // Set the balance based on the chosen currency
             if (currencyType == CurrencyType.SEK)
             {
-                Balance = initialBalance;
+                UserCurrency.Sek = initialBalance;
             }
             else
             {
+
                 if (UserCurrency.ExchangeRate != 0) // Handling potential divide by zero
                 {
                     Balance = initialBalance / UserCurrency.ExchangeRate;
@@ -96,6 +124,9 @@ namespace TeamDataDragons
                 {
                     Console.WriteLine("Error: Exchange rate is zero.");
                 }
+
+                UserCurrency.Dollar = initialBalance;
+
             }
         }
 

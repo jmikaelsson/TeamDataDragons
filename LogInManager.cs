@@ -31,7 +31,7 @@ namespace TeamDataDragons
         {
             while (Attempts <= MaxAttempt)
             {
-                Console.Clear();
+                
                 Attempts++;
                 Console.WriteLine("***Login***\n");
                 Console.Write("Username: ");
@@ -54,6 +54,7 @@ namespace TeamDataDragons
                 {
                     Console.WriteLine("Username or password is incorrect!");
                 }
+                Console.Clear();
             }
 
         }
