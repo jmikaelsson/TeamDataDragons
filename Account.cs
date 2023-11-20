@@ -49,7 +49,12 @@ namespace TeamDataDragons
         public AccountCurrency UserCurrency { get; private set; }
         public AccountType Type { get; private set; }
 
+
+        // Constructor
+        public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType)
+
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType, AccountType accountType)
+
         {
             BankAccountNumber = bankAccountNumber;
             UserCurrency = new AccountCurrency(0, 0);
@@ -57,12 +62,28 @@ namespace TeamDataDragons
             Type = accountType;
         }
 
+
+        // Method to calculate interest and display the result
+        public void Interest()
+        {
+            double interestRate = 0.05; // Example interest rate of 5%
+
         public void Interest()
         {
             double interestRate = 0.05;
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
+
+        // Public static method to add a new account
+        public static void AddNewAccount()
+        {
+            Console.WriteLine("Enter the initial balance for the new account:");
+            double initialBalance;
+
+            while (!double.TryParse(Console.ReadLine(), out initialBalance))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid initial balance:");
 
         public static Account AddNewAccount()
         {
@@ -75,6 +96,7 @@ namespace TeamDataDragons
                 // Return a default Account instance
 
                 return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
+
 
             }
 
@@ -95,6 +117,13 @@ namespace TeamDataDragons
                     chosenCurrency = CurrencyType.SEK;
                     break;
             }
+
+
+            // Generate a new account with a random and unique account number
+            string generatedAccountNumber = GenerateRandomAccountNumber();
+            Account newAccount = new Account(generatedAccountNumber, initialBalance, chosenCurrency);
+
+            Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
 
             Console.WriteLine("Choose the account type: Enter 'Savings' or 'Salary'");
             string accountTypeChoice = Console.ReadLine()?.ToLower() ?? "";
@@ -178,6 +207,7 @@ namespace TeamDataDragons
             Account destinationAccount = accounts[destinationIndex - 1];
 
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
+
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
@@ -205,16 +235,37 @@ namespace TeamDataDragons
             }
         }
 
+
+        // Helper method to generate a unique 8-digit random bank account number
+        private static HashSet<string> usedAccountNumbers = new HashSet<string>();
+
+        // Helper method to generate a unique 8-digit random bank account number
+        private static string GenerateRandomAccountNumber()
+        {
+            Random random = new Random();
+            string generatedAccountNumber;
+
         private void GenerateRandomAccountNumber()
         {
             Random random = new Random();
             bool isUnique = false;
             string generatedAccountNumber = string.Empty;
 
-            while (!isUnique)
+
+            while (true)
             {
                 int randomNumber = random.Next(10000000, 99999999);
                 generatedAccountNumber = randomNumber.ToString();
+
+
+                if (!usedAccountNumbers.Contains(generatedAccountNumber))
+                {
+                    usedAccountNumbers.Add(generatedAccountNumber);
+                    break;
+                }
+            }
+
+            return generatedAccountNumber;
 
                 // Check if the generated number is unique (you need to implement this logic)
                 // For simplicity, assuming it's always unique in this example
@@ -222,6 +273,7 @@ namespace TeamDataDragons
             }
 
             BankAccountNumber = generatedAccountNumber;
+
         }
     }
 }
