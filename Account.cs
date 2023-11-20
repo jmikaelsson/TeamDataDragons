@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
 
 namespace TeamDataDragons
 {
@@ -14,48 +13,59 @@ namespace TeamDataDragons
         Dollar
     }
 
+    public class AccountCurrency
+    {
+        public double Sek { get; set; }
+        public double Dollar { get; set; }
+        public double ExchangeRate { get; private set; }
+
+        public AccountCurrency(double sek, double dollar)
+        {
+            Sek = sek;
+            Dollar = dollar;
+            UpdateExchangeRate(); // Initialize exchange rate
+        }
+
+        public void UpdateExchangeRate()
+        {
+            // Your logic to update the exchange rate goes here
+            // For simplicity, let's set it to a fixed value for now
+            ExchangeRate = 1.0;
+        }
+    }
+
     public class Account
     {
-        // Bankkontoattribut
-        public double Balance { get; set; }
-        public string BankAccountNumber { get; set; }
-        public Currency UserCurrency { get; private set; }
+        public double Balance { get; private set; }
+        public string BankAccountNumber { get; private set; }
+        public AccountCurrency UserCurrency { get; private set; }
 
-        // Konstruktor
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType)
         {
             BankAccountNumber = bankAccountNumber;
-            UserCurrency = new Currency(0, 0); // initialize with 0 balance
+            UserCurrency = new AccountCurrency(0, 0);
             SetInitialBalance(initialBalance, currencyType);
         }
 
- 
-        // ... (existing code)
-
-        // Metod för att öppna ett nytt konto
-        public static void AddNewAccount()
-
-        // Metod för att beräkna ränta och visa resultatet
         public void Interest()
         {
-            double interestRate = 0.05; // Exempelräntesats på 5%
+            double interestRate = 0.05;
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
-        // Metod för att öppna ett nytt konto
         public static Account AddNewAccount()
-
         {
             Console.WriteLine("Enter the initial balance for the new account:");
+
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
             {
                 Console.WriteLine("Invalid input for initial balance.");
-                return;
+                return null;
             }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
-            string currencyChoice = Console.ReadLine()?.ToLower() ?? ""; // Handling null reference here
+            string currencyChoice = Console.ReadLine()?.ToLower() ?? "";
 
             CurrencyType chosenCurrency;
             switch (currencyChoice)
@@ -72,51 +82,28 @@ namespace TeamDataDragons
                     break;
             }
 
-            // Create an instance of the Account class
             Account newAccount = new Account("", 0, CurrencyType.SEK);
-
-            // Here the chosen currency is set to the initial balance
-
             newAccount.SetInitialBalance(initialBalance, chosenCurrency);
-
-            // Generate a unique 8-digit random bank account number
-            string generatedAccountNumber = GenerateRandomAccountNumber();
-
-            Console.WriteLine($"New account {generatedAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
-
-            var newAccount = new Account("", 0, CurrencyType.SEK);
-            newAccount.SetInitialBalance(initialBalance, chosenCurrency);
-
-            // Generate a unique 8-digit random bank account number
             newAccount.GenerateRandomAccountNumber();
 
             Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
 
             return newAccount;
-
         }
 
-        // Helper method to set the initial balance based on the chosen currency
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
-            if (UserCurrency == null)
-            {
-                Console.WriteLine("Error: UserCurrency is null.");
-                return;
-            }
+            UserCurrency = new AccountCurrency(0, 0);
+            UserCurrency.UpdateExchangeRate();
 
-            UserCurrency = new Currency(0, 0); // initialize with 0 balance
-            UserCurrency.UpdateExchangeRate(); // ask for initial exchange rate
-
-            // Set the balance based on the chosen currency
             if (currencyType == CurrencyType.SEK)
             {
                 UserCurrency.Sek = initialBalance;
+                Balance = initialBalance;
             }
             else
             {
-
-                if (UserCurrency.ExchangeRate != 0) // Handling potential divide by zero
+                if (UserCurrency.ExchangeRate != 0)
                 {
                     Balance = initialBalance / UserCurrency.ExchangeRate;
                 }
@@ -126,12 +113,10 @@ namespace TeamDataDragons
                 }
 
                 UserCurrency.Dollar = initialBalance;
-
             }
         }
 
-        // Helper method to generate a unique 8-digit random bank account number
-        private static string GenerateRandomAccountNumber()
+        private void GenerateRandomAccountNumber()
         {
             Random random = new Random();
             bool isUnique = false;
@@ -147,8 +132,9 @@ namespace TeamDataDragons
                 isUnique = true;
             }
 
-            return generatedAccountNumber;
+            BankAccountNumber = generatedAccountNumber;
         }
     }
 }
+
 
