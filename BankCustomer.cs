@@ -36,11 +36,20 @@ namespace TeamDataDragons
                 Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
             }
         }
+        public void CheckLoan()
+        {
+            foreach (var Loan in loans)
+            {
+                Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
+            }
+        }
 
         //Method to display the customer menu.
 
-        public void CustomerMenu()
+        public void CustomerMenu(List<Loan> loans)
         {
+            BankLogo bankLogo = new();
+            bankLogo.DragonBank();
             PrintInfo();
             while (true)
             {
@@ -74,10 +83,10 @@ namespace TeamDataDragons
                         //TransferLog();
                         break;
                     case 6:
-                        Loan.CheckLoan();
+                        CheckLoan();
                         break;
                     case 7:
-                        Loan.ApplyForALoan();
+                        loans.ApplyForALoan();
                         break;
                     case 8:
                         return;

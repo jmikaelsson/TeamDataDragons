@@ -10,7 +10,7 @@ namespace TeamDataDragons
     {
         public static int RefrenceLoanNumber = 1;
         public int LoanNumber { get; set; }
-        private float BankLoan { get; set; }
+        public float BankLoan { get; set; }
         public float MaximumLoan { get; set; }
         public Loan(float bankLoan)
         {
@@ -18,16 +18,9 @@ namespace TeamDataDragons
             LoanNumber = RefrenceLoanNumber++; 
         }
 
-        public void CheckLoan(List<Loan> loans)
-        {
-            foreach(var loan in loans)
-            {
-                Console.WriteLine($"Loan: {LoanNumber} Balance: {BankLoan} ");
-            }
-        }
-
         public void ApplyForALoan()
         {
+
             MaximumLoan = Account.Balance * 5 - BankLoan;
 
             Console.WriteLine($"Your maximum loan amount is: {MaximumLoan}\n" +
