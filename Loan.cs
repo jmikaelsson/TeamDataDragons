@@ -15,7 +15,8 @@ namespace TeamDataDragons
         public Loan(float bankLoan)
         {
             BankLoan = bankLoan;
-            LoanNumber = RefrenceLoanNumber++;        }
+            LoanNumber = RefrenceLoanNumber++; 
+        }
 
         public void CheckLoan(List<Loan> loans)
         {
