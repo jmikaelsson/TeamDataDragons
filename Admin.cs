@@ -60,8 +60,16 @@ namespace TeamDataDragons
                 Console.WriteLine("Wrong input. Try Again.");
                 customerWrongInput = !int.TryParse(Console.ReadLine(), out customerPersonNumber);
             }
+
+
+            Console.WriteLine("Customer added!");
+            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
+            bankUsers.Add(newCustomer);
+            return;
+            
             Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber);
             bankUsers.Add(newCustomer);
+
         }
         //Method for the admin menu
         public void AdministratorMenu(List<AbstractUser> bankUsers)

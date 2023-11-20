@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace TeamDataDragons
 {
     public enum CurrencyType
@@ -47,12 +49,16 @@ namespace TeamDataDragons
         public AccountType Type { get; private set; }
 
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType, AccountType accountType)
+
+
+
         {
             BankAccountNumber = bankAccountNumber;
             UserCurrency = new AccountCurrency(0, 0);
             SetInitialBalance(initialBalance, currencyType);
             Type = accountType;
         }
+
 
         public void Interest()
         {
@@ -61,6 +67,8 @@ namespace TeamDataDragons
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
+
+
         public static Account AddNewAccount()
         {
             Console.WriteLine("Enter the initial balance for the new account:");
@@ -68,8 +76,10 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
             {
                 Console.WriteLine("Invalid input for initial balance.");
+
                 // Return a default Account instance
                 return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
+
             }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
@@ -89,6 +99,7 @@ namespace TeamDataDragons
                     chosenCurrency = CurrencyType.SEK;
                     break;
             }
+
 
             Console.WriteLine("Choose the account type: Enter 'Savings' or 'Salary'");
             string accountTypeChoice = Console.ReadLine()?.ToLower() ?? "";
@@ -132,6 +143,7 @@ namespace TeamDataDragons
                 return;
             }
 
+
             // Transfer money
             Balance -= amount;
             recipientAccount.Balance += amount;
@@ -143,6 +155,7 @@ namespace TeamDataDragons
         {
             Console.WriteLine("Accounts:");
             for (int i = 0; i < accounts.Count; i++)
+
             {
                 Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
             }
@@ -168,10 +181,13 @@ namespace TeamDataDragons
                 return;
             }
 
+
+
             Account sourceAccount = accounts[sourceIndex - 1];
             Account destinationAccount = accounts[destinationIndex - 1];
 
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
+
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
@@ -200,22 +216,33 @@ namespace TeamDataDragons
         }
 
         private void GenerateRandomAccountNumber()
+
+
+        {
+            Random random = new Random();
+            string generatedAccountNumber;
+
+        private void GenerateRandomAccountNumber()
         {
             Random random = new Random();
             bool isUnique = false;
             string generatedAccountNumber = string.Empty;
 
-            while (!isUnique)
+
+            while (true)
             {
                 int randomNumber = random.Next(10000000, 99999999);
                 generatedAccountNumber = randomNumber.ToString();
 
                 // Check if the generated number is unique
+
                 // For simplicity, assuming it's always unique in this example
                 isUnique = true;
             }
 
             BankAccountNumber = generatedAccountNumber;
+
         }
     }
 }
+
