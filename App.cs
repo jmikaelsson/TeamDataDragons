@@ -22,6 +22,7 @@ namespace TeamDataDragons
                 new Admin("Jana", "12345", "Jana Johansson", 000000, true),
                 new Admin("Mohamed", "12345", "Mohamed Mohamud", 000000, true),
                 new Admin("Morgan", "12354", "Morgan Westin", 000000, true),
+
                 new BankCustomer("Test", "abc123", "Test Teston", 2000000),
             };
             LogInManager = new(BankUsers);
@@ -29,10 +30,28 @@ namespace TeamDataDragons
         }
         public void LogInPage()
         {
+            while (true)            
+            { 
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
-
-            LogInManager.TryToLogin();
+            
+                Console.WriteLine("1. Login  2. Exit");
+                bool wrongInput = !int.TryParse(Console.ReadLine(), out int userChoise);
+                if (userChoise == 1)
+                {
+                    LogInManager.TryToLogin();
+                }
+                else if (userChoise == 2)
+                {
+                    Environment.Exit(0);
+                }
+                else if (wrongInput)
+                {
+                    Console.WriteLine("Wrong input!");
+                }
+                Console.Clear();
+            }
+            
 
         }
 
