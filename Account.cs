@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 
 namespace TeamDataDragons
@@ -11,6 +13,12 @@ namespace TeamDataDragons
     {
         SEK,
         Dollar
+    }
+
+    public enum AccountType
+    {
+        Savings,
+        Salary
     }
 
     public class AccountCurrency
@@ -39,12 +47,14 @@ namespace TeamDataDragons
         public double Balance { get; private set; }
         public string BankAccountNumber { get; private set; }
         public AccountCurrency UserCurrency { get; private set; }
+        public AccountType Type { get; private set; }
 
-        public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType)
+        public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType, AccountType accountType)
         {
             BankAccountNumber = bankAccountNumber;
             UserCurrency = new AccountCurrency(0, 0);
             SetInitialBalance(initialBalance, currencyType);
+            Type = accountType;
         }
 
         public void Interest()
@@ -63,9 +73,8 @@ namespace TeamDataDragons
                 Console.WriteLine("Invalid input for initial balance.");
 
                 // Return a default Account instance
-                return new Account("", 0, CurrencyType.SEK);
 
-                return null;
+                return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
 
             }
 
@@ -87,13 +96,88 @@ namespace TeamDataDragons
                     break;
             }
 
-            Account newAccount = new Account("", 0, CurrencyType.SEK);
+            Console.WriteLine("Choose the account type: Enter 'Savings' or 'Salary'");
+            string accountTypeChoice = Console.ReadLine()?.ToLower() ?? "";
+
+            AccountType chosenAccountType;
+            switch (accountTypeChoice)
+            {
+                case "savings":
+                    chosenAccountType = AccountType.Savings;
+                    break;
+                case "salary":
+                    chosenAccountType = AccountType.Salary;
+                    break;
+                default:
+                    Console.WriteLine("Invalid account type. Defaulting to Savings.");
+                    chosenAccountType = AccountType.Savings;
+                    break;
+            }
+
+            Account newAccount = new Account("", 0, CurrencyType.SEK, AccountType.Savings);
             newAccount.SetInitialBalance(initialBalance, chosenCurrency);
             newAccount.GenerateRandomAccountNumber();
+            newAccount.Type = chosenAccountType;
 
-            Console.WriteLine($"New account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.WriteLine($"New {chosenAccountType} account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
 
             return newAccount;
+        }
+
+        public void TransferMoneyBetweenAccounts(Account recipientAccount, double amount)
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Invalid transfer amount.");
+                return;
+            }
+
+            if (Balance < amount)
+            {
+                Console.WriteLine("Insufficient funds for the transfer.");
+                return;
+            }
+
+            // Transfer money
+            Balance -= amount;
+            recipientAccount.Balance += amount;
+
+            Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+        }
+
+        public static void ShowMenu(List<Account> accounts)
+        {
+            Console.WriteLine("Accounts:");
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
+            }
+
+            Console.WriteLine("Choose the source account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Choose the destination account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Enter the amount to transfer:");
+            if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
+            {
+                Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                return;
+            }
+
+            Account sourceAccount = accounts[sourceIndex - 1];
+            Account destinationAccount = accounts[destinationIndex - 1];
+
+            sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
@@ -141,5 +225,6 @@ namespace TeamDataDragons
         }
     }
 }
+
 
 
