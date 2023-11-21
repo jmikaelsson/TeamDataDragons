@@ -71,10 +71,9 @@ namespace TeamDataDragons
                         Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts); //TransferMoneyBetWeenAccounts();
                         break;
                     case 3:
-                        //TransferMoneyBetweenCustomers();
+                        Account.ShowMenuTransferMoneyBetweenCustomers(Accounts);//TransferMoneyBetweenCustomers();
                         break;
                     case 4:
-
                         Account.AddNewAccount();
                         break;
                     case 5:
