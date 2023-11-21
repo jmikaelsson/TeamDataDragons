@@ -46,8 +46,9 @@ namespace TeamDataDragons
 
         //Method to display the customer menu.
 
-        public void CustomerMenu(List<Loan> loans)
+        public void CustomerMenu()
         {
+            Loan loans = new(0.1f);
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
             PrintInfo();
@@ -74,10 +75,7 @@ namespace TeamDataDragons
                         break;
                     case 4:
 
-                        //AddNewAccount();  skriv Account.AddNewAccount() här det ska fungera nu
-
                         Account.AddNewAccount();
-
                         break;
                     case 5:
                         //TransferLog();
@@ -86,7 +84,7 @@ namespace TeamDataDragons
                         CheckLoan();
                         break;
                     case 7:
-                        loans.ApplyForALoan();
+                       
                         break;
                     case 8:
                         return;

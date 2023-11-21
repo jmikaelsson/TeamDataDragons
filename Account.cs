@@ -202,6 +202,7 @@ namespace TeamDataDragons
         }
 
         private void GenerateRandomAccountNumber()
+
         {
             Random random = new Random();
             bool isUnique = false;
@@ -220,4 +221,5 @@ namespace TeamDataDragons
             BankAccountNumber = generatedAccountNumber;
         }
     }
+
 }
