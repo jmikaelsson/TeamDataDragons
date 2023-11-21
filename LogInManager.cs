@@ -18,17 +18,26 @@ namespace TeamDataDragons
             Attempts = 0;
             MaxAttempt = maxAttemts;
             BankUsers = bankUsers;
-
         }
         
         public AbstractUser LogInUser(string inputUserName, string inputPassword)
         {
             return BankUsers.Find(user => user.UserName == inputUserName && user.PassWord == inputPassword); 
-
         }
 
         public void TryToLogin()
         {
+            Console.WriteLine("1. Login  2. Exit");
+            string choise = Console.ReadLine();
+            switch (choise)
+            {
+                case "1":
+                        break;
+                default:
+                    Environment.Exit(0);
+                    break;
+            }
+
             while (Attempts <= MaxAttempt)
             {
                 Attempts++;

@@ -74,6 +74,7 @@ namespace TeamDataDragons
                         //TransferMoneyBetweenCustomers();
                         break;
                     case 4:
+
                         Account.AddNewAccount();
                         break;
                     case 5:
@@ -83,7 +84,7 @@ namespace TeamDataDragons
                         CheckLoan();
                         break;
                     case 7:
-                        loans.ApplyForALoan();
+                       
                         break;
                     case 8:
                         return;
