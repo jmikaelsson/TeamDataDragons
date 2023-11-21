@@ -141,7 +141,7 @@ namespace TeamDataDragons
             Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
         }
 
-        public static void ShowMenu(List<Account> accounts)
+        public static void ShowMenuTransferMoneyBetWeenAccounts(List<Account> accounts)
         {
             Console.WriteLine("Accounts:");
             for (int i = 0; i < accounts.Count; i++)
