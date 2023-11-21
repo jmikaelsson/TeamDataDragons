@@ -15,10 +15,13 @@ namespace TeamDataDragons
         public Loan(float bankLoan)
         {
             BankLoan = bankLoan;
-            LoanNumber = RefrenceLoanNumber++;
+
+            LoanNumber = RefrenceLoanNumber++; 
+            
+
         }
 
-        public void ApplyForALoan()
+        public void ApplyForALoan(double balance)
         {
             List<Account> Accounts = new List<Account>();
             float currentBalance = 0;
@@ -28,7 +31,10 @@ namespace TeamDataDragons
             }
             float maximumLoan = currentBalance * 5 - BankLoan;
 
-            Console.WriteLine($"Your maximum loan amount is: {maximumLoan}\n" +
+
+            Console.WriteLine($"Your maximum loan amount is: {MaximumLoan}\n" +
+
+
                 $"Enter how much you want to loan:");
             bool wrongInput =! float.TryParse(Console.ReadLine(), out float customerLoanApply);
 
@@ -38,7 +44,9 @@ namespace TeamDataDragons
                 wrongInput = !float.TryParse(Console.ReadLine(), out customerLoanApply);
             }
 
+
             if (currentBalance <= 0)
+
             {
                 Console.WriteLine($"Your balance is to low to apply for a loan.");
             }
@@ -54,6 +62,7 @@ namespace TeamDataDragons
                 loans.Add(newLoan);
                 Console.WriteLine($"Your bank loan of {customerLoanApply} is approved.");
             }
+
         }
 
     }
