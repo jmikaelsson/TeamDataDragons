@@ -16,7 +16,7 @@ namespace TeamDataDragons
         {
             Dollar = dollar;
             Sek = sek;
-            UpdateExchangeRate();
+            
         }
         
         public void ExchangeToUSD(double amountInSek)
@@ -35,33 +35,47 @@ namespace TeamDataDragons
         }
        
 
-        public void CurrencyRun()
+        public void CurrencyRun(Account balance)
         {
-            double amountSek = double.Parse(Console.ReadLine()); // users balance in SEK
+            
 
-            double amountDollar = double.Parse(Console.ReadLine()); // users balance in dollar
-
-            Currency userCurrency = new Currency(amountSek, amountDollar);
+            Currency userCurrency = new Currency(balance.Balance, 0); // users Balance from Acount class
             Console.WriteLine($"your balance: {userCurrency.Sek} SEK and {userCurrency.Dollar} USD");
 
 
-            Console.Write("to exchange SEK to USD tap 1 , to exchange USD to SEK tap 2? (1/2): ");
-            int response = int.Parse(Console.ReadLine());
-
-            if (response == 2)
+            
+            bool KeepExchanging = true;
+            while (KeepExchanging)
             {
-                Console.WriteLine("how much USD do you want to exchange to SEK?");
-                double exchangeAamount = double.Parse(Console.ReadLine());
-                userCurrency.ExchangeToSEK(exchangeAamount);   // User exchanges USD to SEK
-            }
-            else if (response == 1)
-            {
-                Console.WriteLine("how much SEK do you want to exchange to USD?");
-                double exchangeAamount = double.Parse(Console.ReadLine());
-                userCurrency.ExchangeToUSD(exchangeAamount);  // User exchanges SEK to USD
+                Console.Write("To exchange SEK to USD tap 1, to exchange USD to SEK tap 2, or type 'exit' to stop: ");
+                string response = Console.ReadLine();
+                switch (response)
+                {
+                    case "1":
+                        Console.WriteLine("How much SEK do you want to exchange to USD?");
+                        double exchangeAmount = double.Parse(Console.ReadLine());
+                        userCurrency.ExchangeToUSD(exchangeAmount);  // User exchanges SEK to USD
+                        Console.WriteLine($"Updated balance: {userCurrency.Sek} sek and {userCurrency.Dollar} usd");  // Display updated balance
+                        break;
+                    case "2":
+                        Console.WriteLine("How much USD do you want to exchange to SEK?");
+                        double exchangeAmount1 = double.Parse(Console.ReadLine());
+                        userCurrency.ExchangeToSEK(exchangeAmount1);   // User exchanges USD to SEK
+                        Console.WriteLine($"Updated balance: {userCurrency.Sek} sek and {userCurrency.Dollar} usd");  // Display updated balance
+                        break;
+                    case "exit":
+                        // return to menu
+                        KeepExchanging = false;
+                        break;
+                    default:
+                        // wrong input
+                        Console.WriteLine("Invalid input. Please enter 1, 2, or 'exit'.");
+                        break;
+
+                }
             }
 
-            Console.WriteLine($"Updated balance: {userCurrency.Sek} sek and {userCurrency.Dollar} usd");  // Display updated balance
+                
         }
     }
 }

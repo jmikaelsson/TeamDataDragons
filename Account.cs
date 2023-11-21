@@ -56,9 +56,9 @@ namespace TeamDataDragons
             Type = accountType;
         }
 
-        public void Interest()
+        public void Interest(UpdateCurrencyExchange interest1)
         {
-            double interestRate = 0.05;
+            double interestRate = interest1.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
