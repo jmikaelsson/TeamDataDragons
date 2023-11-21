@@ -67,8 +67,7 @@ namespace TeamDataDragons
             bankUsers.Add(newCustomer);
             return;
             
-            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber);
-            bankUsers.Add(newCustomer);
+            
 
         }
         //Method for the admin menu

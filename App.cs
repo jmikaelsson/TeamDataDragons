@@ -30,31 +30,11 @@ namespace TeamDataDragons
         }
         public void LogInPage()
         {
-            while (true)            
-            { 
+
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
+            LogInManager.TryToLogin();
             
-                Console.WriteLine("1. Login  2. Exit");
-                bool wrongInput = !int.TryParse(Console.ReadLine(), out int userChoise);
-                if (userChoise == 1)
-                {
-                    LogInManager.TryToLogin();
-                }
-                else if (userChoise == 2)
-                {
-                    Environment.Exit(0);
-                }
-                else if (wrongInput)
-                {
-                    Console.WriteLine("Wrong input!");
-                }
-                Console.Clear();
-
-            }
-
-            
-
         }
 
 

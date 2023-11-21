@@ -222,27 +222,28 @@ namespace TeamDataDragons
             Random random = new Random();
             string generatedAccountNumber;
 
-        private void GenerateRandomAccountNumber()
-        {
-            Random random = new Random();
-            bool isUnique = false;
-            string generatedAccountNumber = string.Empty;
-
-
-            while (true)
+            void GenerateRandomAccountNumber()
             {
-                int randomNumber = random.Next(10000000, 99999999);
-                generatedAccountNumber = randomNumber.ToString();
+                Random random = new Random();
+                bool isUnique = false;
+                string generatedAccountNumber = string.Empty;
 
-                // Check if the generated number is unique
 
-                // For simplicity, assuming it's always unique in this example
-                isUnique = true;
+                while (true)
+                {
+                    int randomNumber = random.Next(10000000, 99999999);
+                    generatedAccountNumber = randomNumber.ToString();
+
+                    // Check if the generated number is unique
+
+                    // For simplicity, assuming it's always unique in this example
+                    isUnique = true;
+                }
+
+                BankAccountNumber = generatedAccountNumber;
+
             }
-
-            BankAccountNumber = generatedAccountNumber;
-
         }
     }
-}
 
+}
