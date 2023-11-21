@@ -61,9 +61,6 @@ namespace TeamDataDragons
                 userCurrency.ExchangeToUSD(exchangeAamount);  // User exchanges SEK to USD
             }
 
-  
-
-
             Console.WriteLine($"Updated balance: {userCurrency.Sek} sek and {userCurrency.Dollar} usd");  // Display updated balance
         }
     }
