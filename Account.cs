@@ -176,6 +176,47 @@ namespace TeamDataDragons
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
         }
 
+        public static void ShowMenuTransferMoneyBetweenCustomers(List<Account> accounts)
+        {
+            Console.WriteLine("Accounts:");
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
+            }
+
+            Console.WriteLine("Choose the source account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Choose the destination account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Enter the amount to transfer:");
+            if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
+            {
+                Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                return;
+            }
+
+            Account sourceAccount = accounts[sourceIndex - 1];
+            Account destinationAccount = accounts[destinationIndex - 1];
+
+            if (sourceAccount.Balance < transferAmount)
+            {
+                Console.WriteLine("Insufficient funds for the transfer. Aborting operation.");
+                return;
+            }
+
+            sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
+        }
+
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
             UserCurrency = new AccountCurrency(0, 0);
