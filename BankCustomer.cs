@@ -67,7 +67,7 @@ namespace TeamDataDragons
                         CheckBalance();
                         break;
                     case 2:
-                        //TransferMoneyBetWeenAccounts();
+                        Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts); //TransferMoneyBetWeenAccounts();
                         break;
                     case 3:
                         //TransferMoneyBetweenCustomers();
