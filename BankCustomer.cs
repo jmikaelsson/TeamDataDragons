@@ -48,7 +48,7 @@ namespace TeamDataDragons
 
         public void CustomerMenu()
         {
-            Loan loans = new(0.1f);
+            Loan loans = new();
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
             PrintInfo();
