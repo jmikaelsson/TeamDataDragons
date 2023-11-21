@@ -38,10 +38,13 @@ namespace TeamDataDragons
                 Console.WriteLine("Wrong input. Try Again.");
                 adminWrongInput = !int.TryParse(Console.ReadLine(), out adminPersonNumber);
             }
-
+            Console.WriteLine("Following admin added:");
             Admin newAdmin = new Admin(administratorName, adminPassword, adminFirstLastName, adminPersonNumber);
-            Console.WriteLine("Administrator added!");
             bankUsers.Add(newAdmin);
+            Console.WriteLine($"Username: {administratorName}\nAdmin name: {adminFirstLastName}\nAdmin person number:{adminPersonNumber}");
+            Console.WriteLine("Press enter to return to menu.");
+            Console.ReadKey();
+            return;
         }
 
         //Creates a method to add customer which is saved in the list of bankUsers from abstractuser
@@ -62,13 +65,13 @@ namespace TeamDataDragons
             }
 
 
-            Console.WriteLine("Customer added!");
+            Console.WriteLine("Following customer added:");
             Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
             bankUsers.Add(newCustomer);
+            Console.WriteLine($"Username: {customerName}\nCustomer name: {customerFirstLastName}\nCustomer person number:{customerPersonNumber}");
+            Console.WriteLine("Press enter to return to menu.");
+            Console.ReadKey();
             return;
-            
-            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber);
-            bankUsers.Add(newCustomer);
 
         }
         //Method for the admin menu
