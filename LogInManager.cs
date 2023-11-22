@@ -27,40 +27,45 @@ namespace TeamDataDragons
 
         public void TryToLogin()
         {
-            Console.WriteLine("1. Login  2. Exit");
-            string choise = Console.ReadLine();
-            switch (choise)
+            while (true)
             {
-                case "1":
+                Console.WriteLine("1. Login  2. Exit");
+                string choise = Console.ReadLine();
+                switch (choise)
+                {
+                    case "1":
                         break;
-                default:
-                    Environment.Exit(0);
-                    break;
-            }
-
-            while (Attempts <= MaxAttempt)
-            {
-                Attempts++;
-                Console.WriteLine("*** Login ***");
-                Console.Write("Username: ");
-                string inputUserName = Console.ReadLine();
-                Console.Write("Password: ");
-                string inputPassword = Console.ReadLine();
-                var user = LogInUser(inputUserName, inputPassword);
-                if (user != null)
-                {
-                    if (user is Admin admin)
-                    {
-                        admin.AdministratorMenu(BankUsers);
-                    }
-                    if (user is BankCustomer customer)
-                    {
-                        customer.CustomerMenu();
-                    }
+                    default:
+                        Environment.Exit(0);
+                        break;
                 }
-                else
+
+                while (Attempts <= MaxAttempt)
                 {
-                    Console.WriteLine("Username or password is incorrect!");
+                    Attempts++;
+                    Console.WriteLine("*** Login ***");
+                    Console.Write("Username: ");
+                    string inputUserName = Console.ReadLine();
+                    Console.Write("Password: ");
+                    string inputPassword = Console.ReadLine();
+                    var user = LogInUser(inputUserName, inputPassword);
+                    if (user != null)
+                    {
+                        if (user is Admin admin)
+                        {
+                            admin.AdministratorMenu(BankUsers);
+                            break;
+                        }
+                        if (user is BankCustomer customer)
+                        {
+                            customer.CustomerMenu();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Username or password is incorrect!");
+                    }
                 }
             }
 

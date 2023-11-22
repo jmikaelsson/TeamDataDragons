@@ -110,6 +110,7 @@ namespace TeamDataDragons
                         saving.SavingMenu();
                         break;
                     case 6:
+
                         Account.PrintTransferLogs(accounts);
                         break;
                     case 7:
