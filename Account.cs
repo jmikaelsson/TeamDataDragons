@@ -43,15 +43,12 @@ namespace TeamDataDragons
 
     public class Account
     {
-        public double Balance { get; private set; }
-        public string BankAccountNumber { get; private set; }
-        public AccountCurrency UserCurrency { get; private set; }
-        public AccountType Type { get; private set; }
+        public double Balance { get;  set; }
+        public string BankAccountNumber { get;  set; }
+        public AccountCurrency UserCurrency { get;  set; }
+        public AccountType Type { get;  set; }
 
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType, AccountType accountType)
-
-
-
         {
             BankAccountNumber = bankAccountNumber;
             UserCurrency = new AccountCurrency(0, 0);
@@ -59,15 +56,12 @@ namespace TeamDataDragons
             Type = accountType;
         }
 
-
-        public void Interest()
+        public void Interest(UpdateCurrencyExchange interest1)
         {
-            double interestRate = 0.05;
+            double interestRate = interest1.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
-
-
 
         public static Account AddNewAccount()
         {
@@ -76,10 +70,8 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
             {
                 Console.WriteLine("Invalid input for initial balance.");
-
                 // Return a default Account instance
                 return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
-
             }
 
             Console.WriteLine("Choose a currency: Enter 'SEK' for Swedish Krona or 'Dollar' for US Dollar");
@@ -99,7 +91,6 @@ namespace TeamDataDragons
                     chosenCurrency = CurrencyType.SEK;
                     break;
             }
-
 
             Console.WriteLine("Choose the account type: Enter 'Savings' or 'Salary'");
             string accountTypeChoice = Console.ReadLine()?.ToLower() ?? "";
@@ -143,7 +134,6 @@ namespace TeamDataDragons
                 return;
             }
 
-
             // Transfer money
             Balance -= amount;
             recipientAccount.Balance += amount;
@@ -151,11 +141,10 @@ namespace TeamDataDragons
             Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
         }
 
-        public static void ShowMenu(List<Account> accounts)
+        public static void ShowMenuTransferMoneyBetWeenAccounts(List<Account> accounts)
         {
             Console.WriteLine("Accounts:");
             for (int i = 0; i < accounts.Count; i++)
-
             {
                 Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
             }
@@ -181,13 +170,51 @@ namespace TeamDataDragons
                 return;
             }
 
-
-
             Account sourceAccount = accounts[sourceIndex - 1];
             Account destinationAccount = accounts[destinationIndex - 1];
 
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
+        }
 
+        public static void ShowMenuTransferMoneyBetweenCustomers(List<Account> accounts)
+        {
+            Console.WriteLine("Accounts:");
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
+            }
+
+            Console.WriteLine("Choose the source account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Choose the destination account (enter the corresponding number):");
+            if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
+            {
+                Console.WriteLine("Invalid input. Aborting operation.");
+                return;
+            }
+
+            Console.WriteLine("Enter the amount to transfer:");
+            if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
+            {
+                Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                return;
+            }
+
+            Account sourceAccount = accounts[sourceIndex - 1];
+            Account destinationAccount = accounts[destinationIndex - 1];
+
+            if (sourceAccount.Balance < transferAmount)
+            {
+                Console.WriteLine("Insufficient funds for the transfer. Aborting operation.");
+                return;
+            }
+
+            sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
@@ -217,32 +244,23 @@ namespace TeamDataDragons
 
         private void GenerateRandomAccountNumber()
 
-
-        {
-            Random random = new Random();
-            string generatedAccountNumber;
-
-        private void GenerateRandomAccountNumber()
         {
             Random random = new Random();
             bool isUnique = false;
             string generatedAccountNumber = string.Empty;
 
-
-            while (true)
+            while (!isUnique)
             {
                 int randomNumber = random.Next(10000000, 99999999);
                 generatedAccountNumber = randomNumber.ToString();
 
-                // Check if the generated number is unique
-
+                // Check if the generated number is unique (you need to implement this logic)
                 // For simplicity, assuming it's always unique in this example
                 isUnique = true;
             }
 
             BankAccountNumber = generatedAccountNumber;
-
         }
     }
-}
 
+}
