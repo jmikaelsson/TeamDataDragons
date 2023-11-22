@@ -11,7 +11,7 @@ namespace TeamDataDragons
     public class BankCustomer : AbstractUser
     {
         //List to store bank accounts.
-        public List<Account> Accounts = new List<Account>();
+        public List<Account> accounts = new List<Account>();
         public List<Loan> loans = new List<Loan>();
 
 
@@ -29,24 +29,26 @@ namespace TeamDataDragons
             
         }
 
-        public void CheckBalance()
+        public void CheckBalance(List<Account> accounts)
         {
-            List<Account> Accounts = new();
-            if(Accounts.Count == 0)
+            
+            if(accounts.Count == 0)
             {
                 Console.WriteLine($"There is no active accounts");
             }
             else
             {
-                foreach (var Account in Accounts)
+                foreach (var Account in accounts)
                 {
                     Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
                 }
             }
+            Console.WriteLine($"Press enter to return to menu");
+            Console.ReadKey();
         }
-        public void CheckLoan()
+        public void CheckLoan(List<Loan> loans)
         {
-            List<Loan> loans = new();
+            
             if(loans.Count == 0)
             {
                 Console.WriteLine($"There is no active loans");
@@ -58,6 +60,8 @@ namespace TeamDataDragons
                     Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
                 }
             }
+            Console.WriteLine($"Press enter to return to menu");
+            Console.ReadKey();
         }
 
         //Method to display the customer menu.
@@ -73,6 +77,7 @@ namespace TeamDataDragons
 
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
+            Savings saving = new();
             PrintInfo();
             while (true)
             {
@@ -80,37 +85,40 @@ namespace TeamDataDragons
                 Console.WriteLine("*** Bank Customer Menu ***");
                 Console.WriteLine("Select option (1-8):");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
-                    "3. Transfer money to other customers\n4. Open new account\n5. View transfer log\n6. My Loans\n7. Apply for a loan\n8. Log out");
+                    "3. Transfer money to other customers\n4. Open new account\n5. Savings 6. View transfer log\n7. My Loans\n8. Apply for a loan\n9. Log out");
 
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
-                        CheckBalance();
+                        CheckBalance(accounts);
                         break;
                     case 2:
 
-                        Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts);
+                        Account.ShowMenuTransferMoneyBetWeenAccounts(accounts);
                         break;
                     case 3:
-                        Account.ShowMenuTransferMoneyBetweenCustomers(Accounts);
+                        Account.ShowMenuTransferMoneyBetweenCustomers(accounts);
 
                         break;
                     case 4:
-                        Accounts.Add(Account.AddNewAccount());
+                        accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
-                        //TransferLog();
+                        saving.SavingMenu();
                         break;
                     case 6:
-                        CheckLoan();
+                        //TransferLog();
                         break;
                     case 7:
-                        Loan NewLoan = new(totalLoans);
-                        loans.Add(NewLoan);
+                        CheckLoan(loans);
                         break;
                     case 8:
+                        Loan NewLoan = new(totalLoans);
+                        NewLoan.ApplyForALoan(accounts, loans);
+                        break;
+                    case 9:
                         return;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
