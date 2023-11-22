@@ -109,7 +109,10 @@ namespace TeamDataDragons
                         saving.SavingMenu();
                         break;
                     case 6:
-                        //TransferLog();
+                       foreach (var account in Accounts)
+                        {
+                            account.PrintTransferLogs();
+                        }
                         break;
                     case 7:
                         CheckLoan(loans);
