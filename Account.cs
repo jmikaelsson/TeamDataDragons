@@ -118,7 +118,7 @@ namespace TeamDataDragons
             newAccount.Type = chosenAccountType;
 
             Console.WriteLine($"New {chosenAccountType} account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
-
+            Console.ReadKey();
             return newAccount;
         }
 
@@ -127,12 +127,14 @@ namespace TeamDataDragons
             if (amount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount.");
+                Console.ReadKey();
                 return;
             }
 
             if (Balance < amount)
             {
                 Console.WriteLine("Insufficient funds for the transfer.");
+                Console.ReadKey();
                 return;
             }
 
@@ -145,6 +147,7 @@ namespace TeamDataDragons
             transferLogs.Add(transferInfo);
 
             Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+            Console.ReadKey();
         }
 
 
@@ -160,6 +163,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -167,6 +171,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -174,6 +179,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -189,12 +195,14 @@ namespace TeamDataDragons
             for (int i = 0; i < accounts.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
+                Console.ReadKey();
             }
 
             Console.WriteLine("Choose the source account (enter the corresponding number):");
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -202,6 +210,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -209,6 +218,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -226,10 +236,12 @@ namespace TeamDataDragons
 
         public void PrintTransferLogs()
         {
+
             Console.WriteLine($"Transfer Logs for {BankAccountNumber}:");
             foreach (var log in transferLogs)
             {
                 Console.WriteLine(log);
+                Console.ReadKey();
             }
         }
 
