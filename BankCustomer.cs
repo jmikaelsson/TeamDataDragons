@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
+    //BankCustomer class represents a customer with specifik banking functionalities.
     public class BankCustomer : AbstractUser
     {
         //List to store bank accounts.
         public List<Account> accounts = new List<Account>();
+        //List to store Loans
         public List<Loan> loans = new List<Loan>();
 
 
@@ -19,7 +21,6 @@ namespace TeamDataDragons
         public BankCustomer(string username, string password, string name, int personalnumber, bool isadmin = false)
             : base(username, password, name, personalnumber, isadmin)
         {
-            
         }
 
         //Override method to print customer info.
@@ -28,7 +29,7 @@ namespace TeamDataDragons
             Console.WriteLine($"Name {Name}\nID: {ID}\nPersonal Number: {PersonalNumber}");
             
         }
-
+        //Method to check and display the balance of bank accounts.
         public void CheckBalance(List<Account> accounts)
         {
             
@@ -46,6 +47,7 @@ namespace TeamDataDragons
             Console.WriteLine($"Press enter to return to menu");
             Console.ReadKey();
         }
+        //Method to check and display loans.
         public void CheckLoan(List<Loan> loans)
         {
             
@@ -65,7 +67,6 @@ namespace TeamDataDragons
         }
 
         //Method to display the customer menu.
-
         public void CustomerMenu()
         {
             List<Loan> loans = new();
@@ -85,7 +86,7 @@ namespace TeamDataDragons
                 Console.WriteLine("*** Bank Customer Menu ***");
                 Console.WriteLine("Select option (1-8):");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
-                    "3. Transfer money to other customers\n4. Open new account\n5. Savings 6. View transfer log\n7. My Loans\n8. Apply for a loan\n9. Log out");
+                    "3. Transfer money to other customers\n4. Open new account\n5. Savings\n6. View transfer log\n7. My Loans\n8. Apply for a loan\n9. Log out");
 
                 int choice = int.Parse(Console.ReadLine());
 
@@ -109,7 +110,7 @@ namespace TeamDataDragons
                         saving.SavingMenu();
                         break;
                     case 6:
-                        //TransferLog();
+                        Account.PrintTransferLogs(accounts);
                         break;
                     case 7:
                         CheckLoan(loans);
