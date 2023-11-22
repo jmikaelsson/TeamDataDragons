@@ -77,7 +77,10 @@ namespace TeamDataDragons
                         Account.AddNewAccount();
                         break;
                     case 5:
-                        //TransferLog();
+                        foreach (var account in Accounts)
+                        {
+                            account.PrintTransferLogs();
+                        }
                         break;
                     case 6:
                         CheckLoan();

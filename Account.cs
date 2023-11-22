@@ -47,6 +47,7 @@ namespace TeamDataDragons
         public string BankAccountNumber { get;  set; }
         public AccountCurrency UserCurrency { get;  set; }
         public AccountType Type { get;  set; }
+        private List<string> transferLogs;
 
         public Account(string bankAccountNumber, double initialBalance, CurrencyType currencyType, AccountType accountType)
         {
@@ -54,6 +55,7 @@ namespace TeamDataDragons
             UserCurrency = new AccountCurrency(0, 0);
             SetInitialBalance(initialBalance, currencyType);
             Type = accountType;
+            transferLogs = new List<string>();
         }
 
         public void Interest()
@@ -138,8 +140,13 @@ namespace TeamDataDragons
             Balance -= amount;
             recipientAccount.Balance += amount;
 
+            // Log the transfer
+            string transferInfo = $"{amount} {UserCurrency} transferred from {BankAccountNumber} to {recipientAccount.BankAccountNumber}";
+            transferLogs.Add(transferInfo);
+
             Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
         }
+
 
         public static void ShowMenuTransferMoneyBetWeenAccounts(List<Account> accounts)
         {
@@ -215,6 +222,15 @@ namespace TeamDataDragons
             }
 
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
+        }
+
+        public void PrintTransferLogs()
+        {
+            Console.WriteLine($"Transfer Logs for {BankAccountNumber}:");
+            foreach (var log in transferLogs)
+            {
+                Console.WriteLine(log);
+            }
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
