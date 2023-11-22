@@ -62,7 +62,7 @@ namespace TeamDataDragons
 
         //Method to display the customer menu.
 
-        public void CustomerMenu(Account account)
+        public void CustomerMenu()
         {
             List<Loan> loans = new();
             float totalLoans = 0;
@@ -70,6 +70,7 @@ namespace TeamDataDragons
             {
                 totalLoans += Loan.TotalLoan;
             } 
+
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
             PrintInfo();
