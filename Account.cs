@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Apis.Analytics.v3.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,8 @@ namespace TeamDataDragons
             double interestRate = interest1.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
+            Console.WriteLine("Press enter to return to menu.");
+            Console.ReadLine();
         }
 
         public static Account AddNewAccount()
@@ -118,7 +121,7 @@ namespace TeamDataDragons
             newAccount.Type = chosenAccountType;
 
             Console.WriteLine($"New {chosenAccountType} account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
-
+            Console.ReadKey();
             return newAccount;
         }
 
@@ -127,12 +130,14 @@ namespace TeamDataDragons
             if (amount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount.");
+                Console.ReadKey();
                 return;
             }
 
             if (Balance < amount)
             {
                 Console.WriteLine("Insufficient funds for the transfer.");
+                Console.ReadKey();
                 return;
             }
 
@@ -145,6 +150,7 @@ namespace TeamDataDragons
             transferLogs.Add(transferInfo);
 
             Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+            Console.ReadKey();
         }
 
 
@@ -160,6 +166,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -167,6 +174,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -174,6 +182,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -195,6 +204,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -202,6 +212,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.WriteLine("Invalid input. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -209,6 +220,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
                 Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.ReadKey();
                 return;
             }
 
@@ -218,21 +230,35 @@ namespace TeamDataDragons
             if (sourceAccount.Balance < transferAmount)
             {
                 Console.WriteLine("Insufficient funds for the transfer. Aborting operation.");
+                Console.WriteLine("Press enter to return to menu.");
+                Console.ReadKey();
                 return;
             }
 
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
         }
 
-        public void PrintTransferLogs()
+        public static void PrintTransferLogs(List<Account> accounts)
         {
-            Console.WriteLine($"Transfer Logs for {BankAccountNumber}:");
-            foreach (var log in transferLogs)
+            foreach (var account in accounts)
             {
-                Console.WriteLine(log);
+                if (account.transferLogs.Count == 0)
+                {
+                    Console.WriteLine($"No transfer logs available for account {account.BankAccountNumber}.");
+                }
+                else
+                {
+                    Console.WriteLine($"Transfer Logs for {account.BankAccountNumber}:");
+                    foreach (var log in account.transferLogs)
+                    {
+                        Console.WriteLine(log);
+                    }
+                }
+
+                Console.WriteLine("Press enter to return to menu.");
+                Console.ReadKey();
             }
         }
-
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
             UserCurrency = new AccountCurrency(0, 0);
@@ -252,6 +278,8 @@ namespace TeamDataDragons
                 else
                 {
                     Console.WriteLine("Error: Exchange rate is zero.");
+                    Console.WriteLine("Press enter to return to menu.");
+                    Console.ReadKey();
                 }
 
                 UserCurrency.Dollar = initialBalance;
@@ -270,7 +298,7 @@ namespace TeamDataDragons
                 int randomNumber = random.Next(10000000, 99999999);
                 generatedAccountNumber = randomNumber.ToString();
 
-                // Check if the generated number is unique (you need to implement this logic)
+                // Check if the generated number is unique
                 // For simplicity, assuming it's always unique in this example
                 isUnique = true;
             }
@@ -278,5 +306,4 @@ namespace TeamDataDragons
             BankAccountNumber = generatedAccountNumber;
         }
     }
-
 }
