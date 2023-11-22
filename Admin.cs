@@ -101,12 +101,11 @@ namespace TeamDataDragons
                         AddCustomer(bankUsers);
                         break;
                     case "3":
-                        UpdateCurrencyExchange updatedExchange = new();
-                        updatedExchange.UpdateExchangeRate();
+                        
+                        UpdateCurrencyExchange.UpdateExchangeRate();
                         break;
                     case "4":
-                        UpdateCurrencyExchange updateInterest = new();
-                        updateInterest.InterestRate();
+                        UpdateCurrencyExchange.InterestRate();
                         break;
                     case "5":
                         return;
