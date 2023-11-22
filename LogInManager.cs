@@ -10,13 +10,13 @@ namespace TeamDataDragons
     internal class LogInManager 
     {
         private int Attempts { get; set; }
-        private int MaxAttempt { get; set; }
+        private int MaxAttempts { get; set; }
         private List<AbstractUser> BankUsers { get; set; }
 
         public LogInManager(List<AbstractUser> bankUsers, int maxAttemts = 3)
         {
             Attempts = 0;
-            MaxAttempt = maxAttemts;
+            MaxAttempts = maxAttemts;
             BankUsers = bankUsers;
         }
         
@@ -29,7 +29,9 @@ namespace TeamDataDragons
         {
             while (true)
             {
-                Console.WriteLine("1. Login  2. Exit");
+                BankLogo.DragonBank();
+                Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n" +
+                    "1. Login \n2. Exit");
                 string choise = Console.ReadLine();
                 switch (choise)
                 {
@@ -40,10 +42,12 @@ namespace TeamDataDragons
                         break;
                 }
 
-                while (Attempts <= MaxAttempt)
+                while (Attempts < MaxAttempts)
                 {
+                    Console.Clear();
+                    BankLogo.DragonBank();
                     Attempts++;
-                    Console.WriteLine("*** Login ***");
+                    Console.WriteLine("─── Login ───────────────────────────────────────────────────────────────────────────────────");
                     Console.Write("Username: ");
                     string inputUserName = Console.ReadLine();
                     Console.Write("Password: ");
@@ -62,14 +66,20 @@ namespace TeamDataDragons
                             break;
                         }
                     }
-                    else
+                    else if (Attempts < MaxAttempts)
                     {
-                        Console.WriteLine("Username or password is incorrect!");
+                        Console.WriteLine("\n──────────────────────────────\n");
+                        Console.WriteLine("Username or password is incorrect!" +
+                        "\nPress Enter to try again");
+                        Console.ReadKey();
                     }
                 }
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.WriteLine("Too many incorrect attempts..." +
+                    "\nPress Enter to exit");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
-
-
         }
         
     }
