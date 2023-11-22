@@ -8,7 +8,7 @@ namespace TeamDataDragons
 {
     public class UpdateCurrencyExchange
     {
-        public double Interest;
+        public double Interest { get; set; }
 
         public double ExchangeRate;
         public void UpdateExchangeRate()  // updates the exchange rate
