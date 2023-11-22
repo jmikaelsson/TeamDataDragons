@@ -109,9 +109,10 @@ namespace TeamDataDragons
                         saving.SavingMenu();
                         break;
                     case 6:
-                       foreach (var account in Accounts)
+                       foreach (var account in accounts)
                         {
                             account.PrintTransferLogs();
+                            Console.ReadKey();
                         }
                         break;
                     case 7:
