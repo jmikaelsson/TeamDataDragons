@@ -11,7 +11,7 @@ namespace TeamDataDragons
     public class BankCustomer : AbstractUser
     {
         //List to store bank accounts.
-        public List<Account> Accounts = new List<Account>();
+        public List<Account> accounts = new List<Account>();
         public List<Loan> loans = new List<Loan>();
 
 
@@ -29,28 +29,55 @@ namespace TeamDataDragons
             
         }
 
-        public void CheckBalance()
+        public void CheckBalance(List<Account> accounts)
         {
-            foreach(var Account in Accounts)
+            
+            if(accounts.Count == 0)
             {
-                Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
+                Console.WriteLine($"There is no active accounts");
             }
+            else
+            {
+                foreach (var Account in accounts)
+                {
+                    Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
+                }
+            }
+            Console.WriteLine($"Press enter to return to menu");
+            Console.ReadKey();
         }
-        public void CheckLoan()
+        public void CheckLoan(List<Loan> loans)
         {
-            foreach (var Loan in loans)
+            
+            if(loans.Count == 0)
             {
-                Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
+                Console.WriteLine($"There is no active loans");
             }
+            else
+            {
+                foreach (var Loan in loans)
+                {
+                    Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
+                }
+            }
+            Console.WriteLine($"Press enter to return to menu");
+            Console.ReadKey();
         }
 
         //Method to display the customer menu.
 
         public void CustomerMenu()
         {
-            Loan loans = new();
+            List<Loan> loans = new();
+            float totalLoans = 0;
+            foreach(var Loan in loans)
+            {
+                totalLoans += Loan.TotalLoan;
+            } 
+
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
+            Savings saving = new();
             PrintInfo();
             while (true)
             {
@@ -58,37 +85,43 @@ namespace TeamDataDragons
                 Console.WriteLine("*** Bank Customer Menu ***");
                 Console.WriteLine("Select option (1-8):");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
-                    "3. Transfer money to other customers\n4. Open new account\n5. View transfer log\n6. My Loans\n7. Apply for a loan\n8. Log out");
+                    "3. Transfer money to other customers\n4. Open new account\n5. Savings 6. View transfer log\n7. My Loans\n8. Apply for a loan\n9. Log out");
 
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
-                        CheckBalance();
+                        CheckBalance(accounts);
                         break;
                     case 2:
-                        Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts); //TransferMoneyBetWeenAccounts();
+
+                        Account.ShowMenuTransferMoneyBetWeenAccounts(accounts);
                         break;
                     case 3:
-                        Account.ShowMenuTransferMoneyBetweenCustomers(Accounts);//TransferMoneyBetweenCustomers();
+                        Account.ShowMenuTransferMoneyBetweenCustomers(accounts);
+
                         break;
                     case 4:
-                        Account.AddNewAccount();
+                        accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
-                        foreach (var account in Accounts)
+                        saving.SavingMenu();
+                        break;
+                    case 6:
+                       foreach (var account in Accounts)
                         {
                             account.PrintTransferLogs();
                         }
                         break;
-                    case 6:
-                        CheckLoan();
-                        break;
                     case 7:
-                       
+                        CheckLoan(loans);
                         break;
                     case 8:
+                        Loan NewLoan = new(totalLoans);
+                        NewLoan.ApplyForALoan(accounts, loans);
+                        break;
+                    case 9:
                         return;
                     default:
                         Console.WriteLine("Invalid choice, try again.");

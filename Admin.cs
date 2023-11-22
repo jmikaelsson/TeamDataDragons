@@ -25,13 +25,13 @@ namespace TeamDataDragons
         //Creates a method to add admin which is saved in the list of bankUsers from abstractuser
         public void AddAdmin(List<AbstractUser> bankUsers)
         {
-            Console.WriteLine("Enter a administrator username: ");
+            Console.Write("Enter a administrator username: ");
             string administratorName = Console.ReadLine();
-            Console.WriteLine("Enter a password");
+            Console.Write("Enter a password");
             string adminPassword = Console.ReadLine();
-            Console.WriteLine("Enter first and last name: ");
+            Console.Write("Enter first and last name: ");
             string adminFirstLastName = Console.ReadLine();
-            Console.WriteLine("Enter personalnumber: ");
+            Console.Write("Enter personalnumber: ");
             bool adminWrongInput = !int.TryParse(Console.ReadLine(), out int adminPersonNumber);
             while (adminWrongInput)
             {
@@ -41,7 +41,7 @@ namespace TeamDataDragons
             Console.WriteLine("Following admin added:");
             Admin newAdmin = new Admin(administratorName, adminPassword, adminFirstLastName, adminPersonNumber);
             bankUsers.Add(newAdmin);
-            Console.WriteLine($"Username: {administratorName}\nAdmin name: {adminFirstLastName}\nAdmin person number:{adminPersonNumber}");
+            Console.WriteLine($"Username: {administratorName}\nAdmin name: {adminFirstLastName}\nAdmin person number: {adminPersonNumber}");
             Console.WriteLine("Press enter to return to menu.");
             Console.ReadKey();
             return;
@@ -52,11 +52,11 @@ namespace TeamDataDragons
         {
             Console.Write("Enter customer name: ");
             string customerName = Console.ReadLine();
-            Console.WriteLine("Enter a password: ");
+            Console.Write("Enter a password: ");
             string customerPassword = Console.ReadLine();
-            Console.WriteLine("Enter first and last name: ");
+            Console.Write("Enter first and last name: ");
             string customerFirstLastName = Console.ReadLine();
-            Console.WriteLine("Enter personalnumber: ");
+            Console.Write("Enter personalnumber: ");
             bool customerWrongInput = !int.TryParse(Console.ReadLine(), out int customerPersonNumber);
             while (customerWrongInput)
             {
@@ -66,9 +66,9 @@ namespace TeamDataDragons
 
 
             Console.WriteLine("Following customer added:");
-            Admin newCustomer = new Admin(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
+            BankCustomer newCustomer = new BankCustomer(customerName, customerPassword, customerFirstLastName, customerPersonNumber, false);
             bankUsers.Add(newCustomer);
-            Console.WriteLine($"Username: {customerName}\nCustomer name: {customerFirstLastName}\nCustomer person number:{customerPersonNumber}");
+            Console.WriteLine($"Username: {customerName}\nCustomer name: {customerFirstLastName}\nCustomer person number: {customerPersonNumber}");
             Console.WriteLine("Press enter to return to menu.");
             Console.ReadKey();
             return;
@@ -95,10 +95,10 @@ namespace TeamDataDragons
                 switch (adminSelection)
                 {
                     case "1":
-                        this.AddAdmin(bankUsers);
+                        AddAdmin(bankUsers);
                         break;
                     case "2":
-                        this.AddCustomer(bankUsers);
+                        AddCustomer(bankUsers);
                         break;
                     case "3":
                         UpdateCurrencyExchange updatedExchange = new();

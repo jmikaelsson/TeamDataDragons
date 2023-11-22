@@ -12,9 +12,9 @@ namespace TeamDataDragons
         public double SavingSaldo { get; set; }
         public double Interest;
 
-        public Savings(double savingSaldo)
+        public Savings()
         {
-            SavingSaldo = savingSaldo;
+            
         }
 
         public void SavingMenu()
