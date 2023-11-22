@@ -31,24 +31,45 @@ namespace TeamDataDragons
 
         public void CheckBalance()
         {
-            foreach(var Account in Accounts)
+            List<Account> Accounts = new();
+            if(Accounts.Count == 0)
             {
-                Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
+                Console.WriteLine($"There is no active accounts");
+            }
+            else
+            {
+                foreach (var Account in Accounts)
+                {
+                    Console.WriteLine($"Bankaccount: {Account.BankAccountNumber} Balance: {Account.Balance}");
+                }
             }
         }
         public void CheckLoan()
         {
-            foreach (var Loan in loans)
+            List<Loan> loans = new();
+            if(loans.Count == 0)
             {
-                Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
+                Console.WriteLine($"There is no active loans");
+            }
+            else
+            {
+                foreach (var Loan in loans)
+                {
+                    Console.WriteLine($"Loan: {Loan.LoanNumber} Balance: {Loan.BankLoan} ");
+                }
             }
         }
 
         //Method to display the customer menu.
 
-        public void CustomerMenu()
+        public void CustomerMenu(Account account)
         {
-            Loan loans = new();
+            List<Loan> loans = new();
+            float totalLoans = 0;
+            foreach(var Loan in loans)
+            {
+                totalLoans += Loan.TotalLoan;
+            } 
             BankLogo bankLogo = new();
             bankLogo.DragonBank();
             PrintInfo();
@@ -68,13 +89,15 @@ namespace TeamDataDragons
                         CheckBalance();
                         break;
                     case 2:
-                        Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts); //TransferMoneyBetWeenAccounts();
+
+                        Account.ShowMenuTransferMoneyBetWeenAccounts(Accounts);
                         break;
                     case 3:
-                        Account.ShowMenuTransferMoneyBetweenCustomers(Accounts);//TransferMoneyBetweenCustomers();
+                        Account.ShowMenuTransferMoneyBetweenCustomers(Accounts);
+
                         break;
                     case 4:
-                        Account.AddNewAccount();
+                        Accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
                         //TransferLog();
@@ -83,7 +106,8 @@ namespace TeamDataDragons
                         CheckLoan();
                         break;
                     case 7:
-                       
+                        Loan NewLoan = new(totalLoans);
+                        loans.Add(NewLoan);
                         break;
                     case 8:
                         return;

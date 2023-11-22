@@ -12,18 +12,19 @@ namespace TeamDataDragons
         public int LoanNumber { get; set; }
         public float BankLoan { get; set; }
         public float MaximumLoan { get; set; }
-        public Loan(float bankLoan)
+        public float TotalLoan { get; set; }
+        public Loan(float totalLoan)
         {
-            BankLoan = bankLoan;
 
-            LoanNumber = RefrenceLoanNumber++; 
-            
-
+            //BankLoan = bankLoan;
+            LoanNumber = RefrenceLoanNumber++;
+            TotalLoan = totalLoan;
         }
 
-        public void ApplyForALoan(double balance)
+        public void ApplyForALoan(List<Account> Accounts)
+
         {
-            List<Account> Accounts = new List<Account>();
+            
             float currentBalance = 0;
             foreach(var account in Accounts)
             {
