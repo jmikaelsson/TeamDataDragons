@@ -10,12 +10,11 @@ namespace TeamDataDragons
     public class Savings
     {
         public double SavingSaldo { get; set; }
-        public UpdateCurrencyExchange currencyExchange { get; set; }
-
+        
 
         public Savings()
         {
-           
+ 
         }
 
         public void SavingMenu(List<Account> accounts)
@@ -61,7 +60,7 @@ namespace TeamDataDragons
         }
         public void DepositMoney(List<Account> accounts)
         {
-            double savingInterest = currencyExchange.Interest;
+            
 
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
@@ -73,7 +72,7 @@ namespace TeamDataDragons
                 {
                     SavingSaldo += amount;
                     Console.WriteLine($"{amount} SEK has been deposited into the account. The new balance is {SavingSaldo} SEK.\n" +
-                        $"The interest on your savings account is: {savingInterest} ");
+                        $"The interest on your savings account is: {UpdateCurrencyExchange.Interest} ");
                 }
                 else
                 {
