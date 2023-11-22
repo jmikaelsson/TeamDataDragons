@@ -86,7 +86,7 @@ namespace TeamDataDragons
                 Console.Clear();
                 Console.WriteLine("*** Administrator Menu ***\n" +
                     "Select option (1-4)");
-                Console.WriteLine("1. Add a new administrator\n2. Add a new customer\n3. Update Exchange Rate\n4. Log out");
+                Console.WriteLine("1. Add a new administrator\n2. Add a new customer\n3. Update Exchange Rate\n4. Update interest.\n5. Log out.");
 
                 //Create a variable for the administrators choice
                 string adminSelection = Console.ReadLine();
@@ -105,6 +105,10 @@ namespace TeamDataDragons
                         updatedExchange.UpdateExchangeRate();
                         break;
                     case "4":
+                        UpdateCurrencyExchange updateInterest = new();
+                        updateInterest.InterestRate();
+                        break;
+                    case "5":
                         return;
                     default:
                         Console.WriteLine("Invalid choice. Try again.");
