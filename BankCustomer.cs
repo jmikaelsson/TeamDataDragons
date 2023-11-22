@@ -96,21 +96,18 @@ namespace TeamDataDragons
                         CheckBalance(accounts);
                         break;
                     case 2:
-
                         Account.ShowMenuTransferMoneyBetWeenAccounts(accounts);
                         break;
                     case 3:
                         Account.ShowMenuTransferMoneyBetweenCustomers(accounts);
-
                         break;
                     case 4:
                         accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
-                        saving.SavingMenu();
+                        saving.SavingMenu(accounts);
                         break;
                     case 6:
-
                         Account.PrintTransferLogs(accounts);
                         break;
                     case 7:
