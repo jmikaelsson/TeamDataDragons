@@ -31,8 +31,10 @@ namespace TeamDataDragons
             while(menu)
             {
                 Console.Clear();
-                Console.WriteLine("*** Savings Menu ***\n" +
-                    "Select option (1-4)\n1. Deposit money.\n2. Withdraw money.\n3. View savings balance.\n4. Go back in the menu.");
+                Console.WriteLine("─── Savings Menu ────────────────────────────────────────────────────────────────────────────" +
+                    "\nSelect option (1-4)");
+
+                Console.WriteLine("\n1. Deposit money.\n2. Withdraw money.\n3. View savings balance.\n4. Go back to customer menu.");
 
                 string savingSelection = Console.ReadLine();
 
@@ -40,12 +42,15 @@ namespace TeamDataDragons
                 switch (savingSelection)
                 {
                     case "1":
+                        Console.Clear();
                         DepositMoney(accounts);
                         break;
                     case "2":
+                        Console.Clear();
                         WithdrawMoney(accounts);
                         break;
                     case "3":
+                        Console.Clear();
                         ShowSavingsBalance(accounts);
                         break;
                     case "4":
@@ -60,7 +65,7 @@ namespace TeamDataDragons
         }
         public void DepositMoney(List<Account> accounts)
         {
-            
+            Console.WriteLine("─── Deposit Money ───────────────────────────────────────────────────────────────────────────\n");
 
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
@@ -71,20 +76,23 @@ namespace TeamDataDragons
                 if (double.TryParse(Console.ReadLine(), out double amount) && amount > 0)
                 {
                     SavingSaldo += amount;
-                    Console.WriteLine($"{amount} SEK has been deposited into the account. The new balance is {SavingSaldo} SEK.\n" +
+                    Console.WriteLine("─── Following amount has been deposited: ───\n");
+
+                    Console.WriteLine($"Amount: {amount} SEK .\n The new balance is {SavingSaldo} SEK.\n" +
                         $"The interest on your savings account is: {UpdateCurrencyExchange.Interest} ");
                 }
                 else
                 {
-                    Console.WriteLine("Invalid amount, deposit failed.");
+                    
+                    Console.WriteLine("─── Invalid amount, deposit failed. ───");
                 }
             }
             else
             {
-                Console.WriteLine("There are no savings accounts found.");
+                Console.WriteLine("─── There are no savings accounts found. ───");
             }
-
-            Console.WriteLine("Press enter to return to menu.");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             
         }
@@ -95,6 +103,7 @@ namespace TeamDataDragons
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
 
+            Console.WriteLine("─── Withdraw Money ──────────────────────────────────────────────────────────────────────────\n");
             if (listContain)
             {
                 Console.Write("Enter amount to withdraw: ");
@@ -103,20 +112,21 @@ namespace TeamDataDragons
                     if (amount <= SavingSaldo)
                     {
                         SavingSaldo -= amount;
-                        Console.WriteLine($"{amount} SEK has been withdrawn from the account. The new balance is {SavingSaldo} SEK.");
+                        Console.WriteLine("─── Following amount has been withdrawn ───\n");
+                        Console.WriteLine($"Amount: {amount} SEK \nThe new balance is {SavingSaldo} SEK.");
                     }
                     else
                     {
-                        Console.WriteLine("Insufficient balance to complete the withdrawal.");
+                        Console.WriteLine("─── Insufficient balance to complete the withdrawal. ───");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid amount. Withdrawal failed.");
+                    Console.WriteLine("─── Invalid amount. Withdrawal failed. ───");
                 }
             }
-
-            Console.WriteLine("Press enter to return to menu.");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             return;
         }
@@ -125,17 +135,17 @@ namespace TeamDataDragons
         {
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
-
+            Console.WriteLine("─── Savings ─────────────────────────────────────────────────────────────────────────────────\n");
             if (listContain)
             {
                 Console.WriteLine($"Current Balance is: {SavingSaldo}");
             }
             else
             {
-                Console.WriteLine("There is no account to display. ");
+                Console.WriteLine("─── There is no account to display. ───");
             }
-
-            Console.WriteLine("Press enter to return to menu.");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             
         }

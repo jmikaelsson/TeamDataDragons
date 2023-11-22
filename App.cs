@@ -31,8 +31,7 @@ namespace TeamDataDragons
         public void LogInPage()
         {
 
-            BankLogo bankLogo = new();
-            bankLogo.DragonBank();
+            
             LogInManager.TryToLogin();
             
         }

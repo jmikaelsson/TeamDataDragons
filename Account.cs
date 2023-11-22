@@ -58,15 +58,17 @@ namespace TeamDataDragons
             transferLogs = new List<string>();
         }
 
-        public void Interest(UpdateCurrencyExchange interest1)
+        public void Interest()
         {
-            double interestRate = interest1.Interest; // interest is updated by Admin
+            double interestRate = UpdateCurrencyExchange.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
         }
 
         public static Account AddNewAccount()
         {
+            Console.WriteLine("─── Add new account ─────────────────────────────────────────────────────────────────────────\n");
+
             Console.WriteLine("Enter the initial balance for the new account:");
 
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
@@ -153,6 +155,7 @@ namespace TeamDataDragons
 
         public static void ShowMenuTransferMoneyBetWeenAccounts(List<Account> accounts)
         {
+            Console.WriteLine("─── Transfer money ──────────────────────────────────────────────────────────────────────────\n");
             Console.WriteLine("Accounts:");
             for (int i = 0; i < accounts.Count; i++)
             {
