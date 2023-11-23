@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -237,16 +238,21 @@ namespace TeamDataDragons
             sourceAccount.TransferMoneyBetweenAccounts(destinationAccount, transferAmount);
         }
 
-        public void PrintTransferLogs()
+        public static void PrintTransferLogs(List<Account> accounts)
+
         {
 
-            Console.WriteLine($"Transfer Logs for {BankAccountNumber}:");
-            foreach (var log in transferLogs)
+            foreach (var account in accounts)
             {
-                Console.WriteLine(log);
-                Console.ReadKey();
+                Console.WriteLine($"Transfer Logs for {account.BankAccountNumber}:");
+                foreach (var log in account.transferLogs)
+                {
+                    Console.WriteLine(log);
+                    Console.ReadKey();
+                }
             }
         }
+
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
