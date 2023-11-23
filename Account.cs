@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,9 +60,9 @@ namespace TeamDataDragons
             transferLogs = new List<string>();
         }
 
-        public void Interest(UpdateCurrencyExchange interest1)
+        public void Interest()
         {
-            double interestRate = interest1.Interest; // interest is updated by Admin
+            double interestRate = UpdateCurrencyExchange.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
             Console.WriteLine("Press enter to return to menu.");
@@ -70,6 +71,8 @@ namespace TeamDataDragons
 
         public static Account AddNewAccount()
         {
+            Console.WriteLine("─── Add new account ─────────────────────────────────────────────────────────────────────────\n");
+
             Console.WriteLine("Enter the initial balance for the new account:");
 
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
@@ -156,6 +159,7 @@ namespace TeamDataDragons
 
         public static void ShowMenuTransferMoneyBetWeenAccounts(List<Account> accounts)
         {
+            Console.WriteLine("─── Transfer money ──────────────────────────────────────────────────────────────────────────\n");
             Console.WriteLine("Accounts:");
             for (int i = 0; i < accounts.Count; i++)
             {
@@ -198,6 +202,7 @@ namespace TeamDataDragons
             for (int i = 0; i < accounts.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {accounts[i].BankAccountNumber} ({accounts[i].Type})");
+                Console.ReadKey();
             }
 
             Console.WriteLine("Choose the source account (enter the corresponding number):");
@@ -239,6 +244,7 @@ namespace TeamDataDragons
         }
 
         public static void PrintTransferLogs(List<Account> accounts)
+
         {
             foreach (var account in accounts)
             {
@@ -259,6 +265,7 @@ namespace TeamDataDragons
                 Console.ReadKey();
             }
         }
+
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
             UserCurrency = new AccountCurrency(0, 0);

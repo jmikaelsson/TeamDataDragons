@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
+    //AbstractUser kclass represents an abstract user with properties and methods.
     public abstract class AbstractUser
     {
         public static int RefrenceID = 1000;
@@ -16,6 +17,7 @@ namespace TeamDataDragons
         public int PersonalNumber { get; set; }
         public bool IsAdmin { get; set; }
 
+        //Constructor to initialize AbstractUser objekt with given information.
         public AbstractUser(string username, string password, string name, int personalnumber, bool isadmin)
         {
             UserName = username;
@@ -26,6 +28,7 @@ namespace TeamDataDragons
             IsAdmin = isadmin;
 
         }
+        //Abstract method to be implemented by derived classes for printing user information.
         public abstract void PrintInfo(); 
         
     }

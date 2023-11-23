@@ -6,20 +6,28 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    public class UpdateCurrencyExchange
+    public static class UpdateCurrencyExchange
     {
-        public double Interest;
+        public static double Interest { get; set; } = 0.01;
 
-        public double ExchangeRate;
-        public void UpdateExchangeRate()  // updates the exchange rate
+        public static double ExchangeRate { get; set; } = 1.2;
+
+        public static void UpdateExchangeRate()  // updates the exchange rate
         {
+            Console.WriteLine("─── Update exchange rate ────────────────────────────────────────────────────────────────────\n");
+
             Console.WriteLine("Enter the updated exchange rate: ");
             ExchangeRate = double.Parse(Console.ReadLine());
+            Console.WriteLine($"\nThe interest have been updated to all customers by {ExchangeRate} \nPress Enter to return to menu. ");
+            Console.ReadKey();
         }
-        public void InterestRate()
+        public static void InterestRate() // updates interest
         {
+            Console.WriteLine("─── Update inetrest rate ────────────────────────────────────────────────────────────────────\n");
             Console.WriteLine("Enter the updated Intrest rate: ");
             Interest = double.Parse(Console.ReadLine());
+            Console.WriteLine($"\nThe interest have been updated to all customers by {Interest}  \nPress Enter to return to menu.");
+            Console.ReadKey();
         }
     }
 }
