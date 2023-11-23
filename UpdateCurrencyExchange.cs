@@ -16,17 +16,54 @@ namespace TeamDataDragons
         {
             Console.WriteLine("─── Update exchange rate ────────────────────────────────────────────────────────────────────\n");
 
-            Console.WriteLine("Enter the updated exchange rate: ");
-            ExchangeRate = double.Parse(Console.ReadLine());
-            Console.WriteLine($"\nThe interest have been updated to all customers by {ExchangeRate} \nPress Enter to return to menu. ");
+            bool check = false;
+
+            do
+            {
+                Console.WriteLine("Enter the updated exchange rate: ");
+                string input = Console.ReadLine();
+
+                if (double.TryParse(input, out double newExchangeRate))
+                {
+                    ExchangeRate = newExchangeRate;
+                    Console.WriteLine($"\nThe exchange rate has been updated to {ExchangeRate}. \nPress Enter to return to the menu.");
+                    check = true;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+
+            } while (!check);
+           
+
             Console.ReadKey();
         }
         public static void InterestRate() // updates interest
         {
             Console.WriteLine("─── Update inetrest rate ────────────────────────────────────────────────────────────────────\n");
-            Console.WriteLine("Enter the updated Intrest rate: ");
-            Interest = double.Parse(Console.ReadLine());
-            Console.WriteLine($"\nThe interest have been updated to all customers by {Interest}  \nPress Enter to return to menu.");
+            bool check = false;
+
+            do
+            {
+                Console.WriteLine("Enter the updated interest rate: ");
+                string input = Console.ReadLine();
+
+                if (double.TryParse(input, out double newInterest))
+                {
+                    Interest = newInterest;
+                    Console.WriteLine($"\nThe interest rate has been updated to {Interest}. \nPress Enter to return to the menu.");
+                    check = true;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+
+            } while (!check);
+
             Console.ReadKey();
         }
     }
