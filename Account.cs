@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Apis.Analytics.v3.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -64,6 +65,8 @@ namespace TeamDataDragons
             double interestRate = UpdateCurrencyExchange.Interest; // interest is updated by Admin
             double interest = Balance * interestRate;
             Console.WriteLine($"For account {BankAccountNumber}, the interest will be: {interest}");
+            Console.WriteLine("Press enter to return to menu.");
+            Console.ReadLine();
         }
 
         public static Account AddNewAccount()
@@ -232,6 +235,8 @@ namespace TeamDataDragons
             if (sourceAccount.Balance < transferAmount)
             {
                 Console.WriteLine("Insufficient funds for the transfer. Aborting operation.");
+                Console.WriteLine("Press enter to return to menu.");
+                Console.ReadKey();
                 return;
             }
 
@@ -241,18 +246,25 @@ namespace TeamDataDragons
         public static void PrintTransferLogs(List<Account> accounts)
 
         {
-
             foreach (var account in accounts)
             {
-                Console.WriteLine($"Transfer Logs for {account.BankAccountNumber}:");
-                foreach (var log in account.transferLogs)
+                if (account.transferLogs.Count == 0)
                 {
-                    Console.WriteLine(log);
-                    Console.ReadKey();
+                    Console.WriteLine($"No transfer logs available for account {account.BankAccountNumber}.");
                 }
+                else
+                {
+                    Console.WriteLine($"Transfer Logs for {account.BankAccountNumber}:");
+                    foreach (var log in account.transferLogs)
+                    {
+                        Console.WriteLine(log);
+                    }
+                }
+
+                Console.WriteLine("Press enter to return to menu.");
+                Console.ReadKey();
             }
         }
-
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
         {
@@ -273,6 +285,8 @@ namespace TeamDataDragons
                 else
                 {
                     Console.WriteLine("Error: Exchange rate is zero.");
+                    Console.WriteLine("Press enter to return to menu.");
+                    Console.ReadKey();
                 }
 
                 UserCurrency.Dollar = initialBalance;
@@ -291,7 +305,7 @@ namespace TeamDataDragons
                 int randomNumber = random.Next(10000000, 99999999);
                 generatedAccountNumber = randomNumber.ToString();
 
-                // Check if the generated number is unique (you need to implement this logic)
+                // Check if the generated number is unique
                 // For simplicity, assuming it's always unique in this example
                 isUnique = true;
             }
@@ -299,5 +313,4 @@ namespace TeamDataDragons
             BankAccountNumber = generatedAccountNumber;
         }
     }
-
 }

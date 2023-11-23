@@ -115,7 +115,7 @@ namespace TeamDataDragons
                         break;
                     case 6:
                         Console.Clear();
-                        //Account.PrintTransferLogs(accounts);
+                        Account.PrintTransferLogs(accounts);
                         break;
                     case 7:
                         Console.Clear();
