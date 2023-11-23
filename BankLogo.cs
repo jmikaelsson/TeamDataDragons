@@ -10,8 +10,9 @@ namespace TeamDataDragons
     {
         public static void DragonBank()
         {
-
-            Console.WriteLine(@"
+            
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine(@"
  
 ┌───────────────────────────────────────────────────────────────────────────────────────────┐
 │      _____                                              ____                    _         │
@@ -24,10 +25,10 @@ namespace TeamDataDragons
 │                              |___/                                                        │
 └───────────────────────────────────────────────────────────────────────────────────────────┘
 ");
-            
 
 
 
+            Console.ResetColor();
 
         }
        
