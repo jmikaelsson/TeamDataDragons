@@ -58,11 +58,13 @@ namespace TeamDataDragons
                         if (user is Admin admin)
                         {
                             admin.AdministratorMenu(BankUsers);
+                            Attempts = 0;
                             break;
                         }
                         if (user is BankCustomer customer)
                         {
                             customer.CustomerMenu();
+                            Attempts = 0;
                             break;
                         }
                     }
