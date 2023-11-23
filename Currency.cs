@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    public class Currency : UpdateCurrencyExchange
+    public class Currency 
     {
         public double Dollar { get; set; }
         public double Sek { get; set; }
@@ -22,16 +22,16 @@ namespace TeamDataDragons
         public void ExchangeToUSD(double amountInSek)
         {
             Sek -= amountInSek;
-            Dollar += amountInSek / ExchangeRate;
-            Console.WriteLine($"Exchanged {amountInSek} SEK to {amountInSek / ExchangeRate} USD");
+            Dollar += amountInSek / UpdateCurrencyExchange.ExchangeRate;
+            Console.WriteLine($"Exchanged {amountInSek} SEK to {amountInSek / UpdateCurrencyExchange.ExchangeRate} USD");
         }
 
         public void ExchangeToSEK(double amountInUSD)
         {
 
             Dollar -= amountInUSD;
-            Sek += amountInUSD * ExchangeRate;
-            Console.WriteLine($"Exchanged {amountInUSD} Dollar to {amountInUSD * ExchangeRate} SEK");
+            Sek += amountInUSD * UpdateCurrencyExchange.ExchangeRate;
+            Console.WriteLine($"Exchanged {amountInUSD} Dollar to {amountInUSD * UpdateCurrencyExchange.ExchangeRate} SEK");
         }
        
 
