@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TeamDataDragons
 {
@@ -29,6 +30,7 @@ namespace TeamDataDragons
         {
             while (true)
             {
+                Console.Clear();
                 BankLogo.DragonBank();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
@@ -36,12 +38,19 @@ namespace TeamDataDragons
                 Console.WriteLine("1. Login \n2. Exit");
                 Console.ResetColor();
                 string choise = Console.ReadLine();
-                switch (choise)
+                switch (choise) 
                 {
                     case "1":
                         break;
-                    default:
+                    case "2":
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid input, press enter to try again");
+                        Console.ResetColor();
+                        Console.ReadKey();
+                        TryToLogin();
                         break;
                 }
 
