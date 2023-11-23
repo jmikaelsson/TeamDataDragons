@@ -49,7 +49,7 @@ namespace TeamDataDragons
                 }
             }
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
             Console.ResetColor();
             Console.WriteLine($"Press Enter to return to menu");
             Console.ReadKey();
@@ -74,7 +74,7 @@ namespace TeamDataDragons
                 }
             }
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
             Console.ResetColor();
             Console.WriteLine($"Press Enter to return to menu");
             Console.ReadKey();

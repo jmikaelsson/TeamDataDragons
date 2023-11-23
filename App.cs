@@ -15,6 +15,7 @@ namespace TeamDataDragons
 
         public App()
         {
+            //list of defalt users in the system
             BankUsers = new()
             {
                 new Admin("Josefin", "12345", "Josefin Mikaelsson", 950810, true),

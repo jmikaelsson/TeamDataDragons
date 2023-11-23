@@ -12,7 +12,7 @@ namespace TeamDataDragons
     {
         private int Attempts { get; set; }
         private int MaxAttempts { get; set; }
-        private List<AbstractUser> BankUsers { get; set; }
+        private List<AbstractUser> BankUsers { get; set; } //get the list of users in the system
 
         public LogInManager(List<AbstractUser> bankUsers, int maxAttemts = 3)
         {
@@ -38,6 +38,7 @@ namespace TeamDataDragons
                 Console.WriteLine("1. Login \n2. Exit");
                 Console.ResetColor();
                 string choise = Console.ReadLine();
+                //menu for user to choose to login or exit the program
                 switch (choise) 
                 {
                     case "1":
@@ -47,14 +48,14 @@ namespace TeamDataDragons
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid input, press enter to try again");
+                        Console.WriteLine("─── Invalid input, press enter to try again ───");
                         Console.ResetColor();
                         Console.ReadKey();
                         TryToLogin();
                         break;
                 }
 
-                while (Attempts < MaxAttempts)
+                while (Attempts < MaxAttempts) //user has a maximun attemts to try to login
                 {
                     Console.Clear();
                     BankLogo.DragonBank();
@@ -68,13 +69,15 @@ namespace TeamDataDragons
                     string inputPassword = Console.ReadLine();
                     var user = LogInUser(inputUserName, inputPassword);
                     if (user != null)
-                    {
-                        if (user is Admin admin)
+                    { 
+                        //if the username and password is correct with an user thats is regersterd as admin 
+                        if (user is Admin admin) 
                         {
                             admin.AdministratorMenu(BankUsers);
                             Attempts = 0;
                             break;
                         }
+                        //if the username and password is correct with an user that is regesterd as customer
                         if (user is BankCustomer customer)
                         {
                             customer.CustomerMenu();
@@ -82,21 +85,27 @@ namespace TeamDataDragons
                             break;
                         }
                     }
+                    //if the username or password isnt in the system, but the user has tryd less than maximun attemts
                     else if (Attempts < MaxAttempts)
                     {
-                        Console.WriteLine("\n──────────────────────────────\n");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Username or password is incorrect!");
+                        Console.WriteLine("─── Username or password is incorrect! ───");
                         Console.ResetColor();
-                        Console.WriteLine("\nPress Enter to try again");
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                        Console.ResetColor();
+                        Console.WriteLine("Press Enter to try again");
                         Console.ReadKey();
                     }
                 }
+                //if user has try to login more than maximunattets
                 if (Attempts >= MaxAttempts)
                 {
-                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Too many incorrect attempts");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                     Console.ResetColor();
                     Console.WriteLine("\nPress Enter to exit");
                     Console.ReadKey();

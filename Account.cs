@@ -126,7 +126,13 @@ namespace TeamDataDragons
             newAccount.GenerateRandomAccountNumber();
             newAccount.Type = chosenAccountType;
 
-            Console.WriteLine($"New {chosenAccountType} account {newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"\n─── New {chosenAccountType} account ───");
+            Console.ResetColor();
+            Console.WriteLine($"\n{newAccount.BankAccountNumber} opened with initial balance: {initialBalance} {chosenCurrency}");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
             Console.WriteLine("Press enter to return to menu.");
             Console.ReadKey();
             return newAccount;
@@ -139,6 +145,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid transfer amount. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -148,6 +157,9 @@ namespace TeamDataDragons
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Insufficient funds for the transfer. ───");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -163,9 +175,12 @@ namespace TeamDataDragons
             transferLogs.Add(transferInfo);
 
             Console.BackgroundColor = ConsoleColor.Green;
-            Console.WriteLine("─── Transfer successful. ───\n");
+            Console.WriteLine("\n─── Transfer successful. ───\n");
             Console.ResetColor();
             Console.WriteLine($"New balance for {BankAccountNumber}: {Balance} \nNew balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
             Console.WriteLine("Press enter to return to menu.");
             Console.ReadKey();
         }
@@ -188,6 +203,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -199,6 +217,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -209,6 +230,9 @@ namespace TeamDataDragons
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid transfer amount. Aborting operation. ───");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
 
@@ -238,6 +262,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -249,6 +276,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -259,6 +289,9 @@ namespace TeamDataDragons
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Invalid transfer amount. Aborting operation. ───");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -273,6 +306,9 @@ namespace TeamDataDragons
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── Insufficient funds for the transfer. Aborting operation. ───");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
                 return;
@@ -284,21 +320,26 @@ namespace TeamDataDragons
         public static void PrintTransferLogs(List<Account> accounts)
 
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("─── Transfer log ───────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             foreach (var account in accounts)
             {
                 if (account.transferLogs.Count == 0)
                 {
-                    Console.WriteLine($"─── No transfer logs available for account {account.BankAccountNumber}. ───");
+                    Console.WriteLine($"\n─── No transfer logs available for account {account.BankAccountNumber}. ───");
                 }
                 else
                 {
-                    Console.WriteLine($"Transfer Logs for {account.BankAccountNumber}:");
+                    Console.WriteLine($"Transfer Logs for account {account.BankAccountNumber}:");
                     foreach (var log in account.transferLogs)
                     {
                         Console.WriteLine(log);
                     }
                 }
-
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
             }
@@ -324,6 +365,9 @@ namespace TeamDataDragons
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(" ─── Error: Exchange rate is zero. ───");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                     Console.ResetColor();
                     Console.WriteLine("Press enter to return to menu.");
                     Console.ReadKey();

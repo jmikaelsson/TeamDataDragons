@@ -16,6 +16,7 @@ namespace TeamDataDragons
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Update exchange rate ────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
 
 
             bool check = false;
@@ -28,25 +29,33 @@ namespace TeamDataDragons
                 if (double.TryParse(input, out double newExchangeRate))
                 {
                     ExchangeRate = newExchangeRate;
-                    Console.WriteLine($"\nThe exchange rate has been updated to {ExchangeRate}. \nPress Enter to return to the menu.");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─── New exchange rate ───");
+                    Console.ResetColor();
+                    Console.WriteLine($"\nThe exchange rate has been updated to {ExchangeRate}.");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
+                    Console.WriteLine("Press Enter to return to the menu.");
                     check = true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("─── Invalid input. Please enter a valid number. ───");
+                    Console.ResetColor();
                 }
 
             } while (!check);
-           
-
-
+ 
             Console.ReadKey();
         }
         public static void InterestRate() // updates interest
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Update inetrest rate ────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
+
 
             bool check = false;
 
@@ -58,13 +67,22 @@ namespace TeamDataDragons
                 if (double.TryParse(input, out double newInterest))
                 {
                     Interest = newInterest;
-                    Console.WriteLine($"\nThe interest rate has been updated to {Interest}. \nPress Enter to return to the menu.");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─── New intrest rate ───");
+                    Console.ResetColor();
+                    Console.WriteLine($"\nThe interest rate has been updated to {Interest}.");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
+                    Console.WriteLine("Press Enter to return to the menu.");
                     check = true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("─── Invalid input. Please enter a valid number. ───");
+                    Console.ResetColor();
+
                 }
 
             } while (!check);

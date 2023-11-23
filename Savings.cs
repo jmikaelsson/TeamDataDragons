@@ -32,10 +32,9 @@ namespace TeamDataDragons
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("─── Savings Menu ────────────────────────────────────────────────────────────────────────────" +
-                    "\nSelect option (1-4)");
+                Console.WriteLine("─── Savings Menu ────────────────────────────────────────────────────────────────────────────");
                 Console.ResetColor();
-
+                Console.WriteLine("Select option (1-4)");
                 Console.WriteLine("\n1. Deposit money.\n2. Withdraw money.\n3. View savings balance.\n4. Go back to customer menu.");
 
                 string savingSelection = Console.ReadLine();
@@ -82,7 +81,7 @@ namespace TeamDataDragons
                 {
                     SavingSaldo += amount;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("─── Following amount has been deposited: ───\n");
+                    Console.WriteLine("\n─── Following amount has been deposited: ───\n");
                     Console.ResetColor();
 
                     Console.WriteLine($"Amount: {amount} SEK .\nThe new balance is {SavingSaldo} SEK.\n" +
@@ -126,13 +125,13 @@ namespace TeamDataDragons
                     {
                         SavingSaldo -= amount;
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine("─── Following amount has been withdrawn ───\n");
+                        Console.WriteLine("\n─── Following amount has been withdrawn ───\n");
                         Console.ResetColor();
                         Console.WriteLine($"Amount: {amount} SEK \nThe new balance is {SavingSaldo} SEK.");
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("─── Insufficient balance to complete the withdrawal. ───");
                         Console.ResetColor();
                     }
