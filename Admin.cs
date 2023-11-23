@@ -142,7 +142,7 @@ namespace TeamDataDragons
                         return;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid choice. Try again.");
+                        Console.WriteLine(" ─── Invalid choice. Try again. ───");
                         Console.ResetColor();
                         break;
                 }

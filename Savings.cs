@@ -60,7 +60,7 @@ namespace TeamDataDragons
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid choice. Try again.");
+                        Console.WriteLine("─── Invalid choice. Try again. ───");
                         Console.ResetColor();
                         break;
                 }
@@ -85,7 +85,7 @@ namespace TeamDataDragons
                     Console.WriteLine("─── Following amount has been deposited: ───\n");
                     Console.ResetColor();
 
-                    Console.WriteLine($"Amount: {amount} SEK .\n The new balance is {SavingSaldo} SEK.\n" +
+                    Console.WriteLine($"Amount: {amount} SEK .\nThe new balance is {SavingSaldo} SEK.\n" +
                         $"The interest on your savings account is: {UpdateCurrencyExchange.Interest} ");
                 }
                 else

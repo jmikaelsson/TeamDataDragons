@@ -37,7 +37,9 @@ namespace TeamDataDragons
             Console.ResetColor();
             if (accounts.Count == 0)
             {
-                Console.WriteLine($"There is no active accounts\n");
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine($"─── There is no active accounts ───\n");
+                Console.ResetColor();
             }
             else
             {
@@ -60,7 +62,9 @@ namespace TeamDataDragons
             Console.ResetColor();
             if (loans.Count == 0)
             {
-                Console.WriteLine($"There is no active loans\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"─── There is no active loan ───\n");
+                Console.ResetColor();
             }
             else
             {

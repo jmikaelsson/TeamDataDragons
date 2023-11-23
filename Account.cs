@@ -76,7 +76,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double initialBalance))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input for initial balance.");
+                Console.WriteLine("─── Invalid input for initial balance. ───");
                 Console.ResetColor();
                 return new Account("", 0, CurrencyType.SEK, AccountType.Savings);
             }
@@ -94,7 +94,9 @@ namespace TeamDataDragons
                     chosenCurrency = CurrencyType.Dollar;
                     break;
                 default:
-                    Console.WriteLine("Invalid currency choice. Defaulting to SEK.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("─── Invalid currency choice. Defaulting to SEK. ───");
+                    Console.ResetColor();
                     chosenCurrency = CurrencyType.SEK;
                     break;
             }
@@ -112,7 +114,9 @@ namespace TeamDataDragons
                     chosenAccountType = AccountType.Salary;
                     break;
                 default:
-                    Console.WriteLine("Invalid account type. Defaulting to Savings.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("─── Invalid account type. Defaulting to Savings ───");
+                    Console.ResetColor();
                     chosenAccountType = AccountType.Savings;
                     break;
             }
@@ -133,7 +137,7 @@ namespace TeamDataDragons
             if (amount <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid transfer amount.");
+                Console.WriteLine("─── Invalid transfer amount. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -143,7 +147,7 @@ namespace TeamDataDragons
             if (Balance < amount)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Insufficient funds for the transfer.");
+                Console.WriteLine("─── Insufficient funds for the transfer. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -158,8 +162,10 @@ namespace TeamDataDragons
             string transferInfo = $" {amount} {UserCurrency} transferred from {BankAccountNumber} to {recipientAccount.BankAccountNumber}";
             transferLogs.Add(transferInfo);
 
-
-            Console.WriteLine($"\n─── Transfer successful. ─── \nNew balance for {BankAccountNumber}: {Balance} \nNew balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("─── Transfer successful. ───\n");
+            Console.ResetColor();
+            Console.WriteLine($"New balance for {BankAccountNumber}: {Balance} \nNew balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
             Console.WriteLine("Press enter to return to menu.");
             Console.ReadKey();
         }
@@ -180,7 +186,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Aborting operation.");
+                Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -191,7 +197,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Aborting operation.");
+                Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -230,7 +236,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int sourceIndex) || sourceIndex < 1 || sourceIndex > accounts.Count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Aborting operation.");
+                Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -241,7 +247,7 @@ namespace TeamDataDragons
             if (!int.TryParse(Console.ReadLine(), out int destinationIndex) || destinationIndex < 1 || destinationIndex > accounts.Count || destinationIndex == sourceIndex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Aborting operation.");
+                Console.WriteLine("─── Invalid input. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -252,7 +258,7 @@ namespace TeamDataDragons
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.WriteLine("─── Invalid transfer amount. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -265,7 +271,7 @@ namespace TeamDataDragons
             if (sourceAccount.Balance < transferAmount)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Insufficient funds for the transfer. Aborting operation.");
+                Console.WriteLine("─── Insufficient funds for the transfer. Aborting operation. ───");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
@@ -282,7 +288,7 @@ namespace TeamDataDragons
             {
                 if (account.transferLogs.Count == 0)
                 {
-                    Console.WriteLine($"No transfer logs available for account {account.BankAccountNumber}.");
+                    Console.WriteLine($"─── No transfer logs available for account {account.BankAccountNumber}. ───");
                 }
                 else
                 {
@@ -317,7 +323,7 @@ namespace TeamDataDragons
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Exchange rate is zero.");
+                    Console.WriteLine(" ─── Error: Exchange rate is zero. ───");
                     Console.ResetColor();
                     Console.WriteLine("Press enter to return to menu.");
                     Console.ReadKey();
