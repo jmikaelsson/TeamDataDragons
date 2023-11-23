@@ -31,8 +31,10 @@ namespace TeamDataDragons
             while(menu)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("─── Savings Menu ────────────────────────────────────────────────────────────────────────────" +
                     "\nSelect option (1-4)");
+                Console.ResetColor();
 
                 Console.WriteLine("\n1. Deposit money.\n2. Withdraw money.\n3. View savings balance.\n4. Go back to customer menu.");
 
@@ -57,7 +59,9 @@ namespace TeamDataDragons
                         menu = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Try again.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("─── Invalid choice. Try again. ───");
+                        Console.ResetColor();
                         break;
                 }
             }
@@ -65,8 +69,9 @@ namespace TeamDataDragons
         }
         public void DepositMoney(List<Account> accounts)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Deposit Money ───────────────────────────────────────────────────────────────────────────\n");
-
+            Console.ResetColor();
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
 
@@ -76,22 +81,29 @@ namespace TeamDataDragons
                 if (double.TryParse(Console.ReadLine(), out double amount) && amount > 0)
                 {
                     SavingSaldo += amount;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("─── Following amount has been deposited: ───\n");
+                    Console.ResetColor();
 
-                    Console.WriteLine($"Amount: {amount} SEK .\n The new balance is {SavingSaldo} SEK.\n" +
+                    Console.WriteLine($"Amount: {amount} SEK .\nThe new balance is {SavingSaldo} SEK.\n" +
                         $"The interest on your savings account is: {UpdateCurrencyExchange.Interest} ");
                 }
                 else
                 {
-                    
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("─── Invalid amount, deposit failed. ───");
+                    Console.ResetColor();
                 }
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── There are no savings accounts found. ───");
+                Console.ResetColor();
             }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
             Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             
@@ -102,8 +114,9 @@ namespace TeamDataDragons
         {
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
-
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Withdraw Money ──────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             if (listContain)
             {
                 Console.Write("Enter amount to withdraw: ");
@@ -112,20 +125,28 @@ namespace TeamDataDragons
                     if (amount <= SavingSaldo)
                     {
                         SavingSaldo -= amount;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine("─── Following amount has been withdrawn ───\n");
+                        Console.ResetColor();
                         Console.WriteLine($"Amount: {amount} SEK \nThe new balance is {SavingSaldo} SEK.");
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine("─── Insufficient balance to complete the withdrawal. ───");
+                        Console.ResetColor();
                     }
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("─── Invalid amount. Withdrawal failed. ───");
+                    Console.ResetColor();
                 }
             }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
             Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             return;
@@ -135,16 +156,22 @@ namespace TeamDataDragons
         {
             Account savingAccount = accounts.FirstOrDefault(account => account.Type == AccountType.Savings);
             bool listContain = accounts.Contains(savingAccount);
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Savings ─────────────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             if (listContain)
             {
                 Console.WriteLine($"Current Balance is: {SavingSaldo}");
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("─── There is no account to display. ───");
+                Console.ResetColor();
             }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
             Console.WriteLine("Press Enter to return to menu.");
             Console.ReadKey();
             

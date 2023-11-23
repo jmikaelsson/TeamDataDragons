@@ -14,7 +14,9 @@ namespace TeamDataDragons
 
         public static void UpdateExchangeRate()  // updates the exchange rate
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Update exchange rate ────────────────────────────────────────────────────────────────────\n");
+
 
             bool check = false;
 
@@ -38,11 +40,14 @@ namespace TeamDataDragons
             } while (!check);
            
 
+
             Console.ReadKey();
         }
         public static void InterestRate() // updates interest
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Update inetrest rate ────────────────────────────────────────────────────────────────────\n");
+
             bool check = false;
 
             do
@@ -63,6 +68,7 @@ namespace TeamDataDragons
                 }
 
             } while (!check);
+
 
             Console.ReadKey();
         }

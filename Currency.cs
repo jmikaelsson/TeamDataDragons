@@ -69,7 +69,9 @@ namespace TeamDataDragons
                         break;
                     default:
                         // wrong input
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid input. Please enter 1, 2, or 'exit'.");
+                        Console.ResetColor();
                         break;
 
                 }

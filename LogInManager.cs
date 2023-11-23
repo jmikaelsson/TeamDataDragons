@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TeamDataDragons
 {
@@ -29,16 +30,27 @@ namespace TeamDataDragons
         {
             while (true)
             {
+                Console.Clear();
                 BankLogo.DragonBank();
-                Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n" +
-                    "1. Login \n2. Exit");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+                Console.ResetColor();
+                Console.WriteLine("1. Login \n2. Exit");
+                Console.ResetColor();
                 string choise = Console.ReadLine();
-                switch (choise)
+                switch (choise) 
                 {
                     case "1":
                         break;
-                    default:
+                    case "2":
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid input, press enter to try again");
+                        Console.ResetColor();
+                        Console.ReadKey();
+                        TryToLogin();
                         break;
                 }
 
@@ -47,7 +59,9 @@ namespace TeamDataDragons
                     Console.Clear();
                     BankLogo.DragonBank();
                     Attempts++;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("─── Login ───────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
                     Console.Write("Username: ");
                     string inputUserName = Console.ReadLine();
                     Console.Write("Password: ");
@@ -58,29 +72,37 @@ namespace TeamDataDragons
                         if (user is Admin admin)
                         {
                             admin.AdministratorMenu(BankUsers);
+                            Attempts = 0;
                             break;
                         }
                         if (user is BankCustomer customer)
                         {
                             customer.CustomerMenu();
+                            Attempts = 0;
                             break;
                         }
                     }
                     else if (Attempts < MaxAttempts)
                     {
                         Console.WriteLine("\n──────────────────────────────\n");
-                        Console.WriteLine("Username or password is incorrect!" +
-                        "\nPress Enter to try again");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Username or password is incorrect!");
+                        Console.ResetColor();
+                        Console.WriteLine("\nPress Enter to try again");
                         Console.ReadKey();
                     }
                 }
-                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
-                Console.WriteLine("Too many incorrect attempts..." +
-                    "\nPress Enter to exit");
-                Console.ReadKey();
-                Environment.Exit(0);
+                if (Attempts >= MaxAttempts)
+                {
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Too many incorrect attempts");
+                    Console.ResetColor();
+                    Console.WriteLine("\nPress Enter to exit");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
             }
         }
-        
     }
 }

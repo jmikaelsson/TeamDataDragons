@@ -32,10 +32,14 @@ namespace TeamDataDragons
         //Method to check and display the balance of bank accounts.
         public void CheckBalance(List<Account> accounts)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Accounts ────────────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             if (accounts.Count == 0)
             {
-                Console.WriteLine($"There is no active accounts\n");
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine($"─── There is no active accounts ───\n");
+                Console.ResetColor();
             }
             else
             {
@@ -44,17 +48,23 @@ namespace TeamDataDragons
                     Console.WriteLine($"Bankaccount: {Account.BankAccountNumber}\nBalance: {Account.Balance}\n────────");
                 }
             }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             Console.WriteLine($"Press Enter to return to menu");
             Console.ReadKey();
         }
         //Method to check and display loans.
         public void CheckLoan(List<Loan> loans)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Loans ───────────────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             if (loans.Count == 0)
             {
-                Console.WriteLine($"There is no active loans\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"─── There is no active loan ───\n");
+                Console.ResetColor();
             }
             else
             {
@@ -63,7 +73,9 @@ namespace TeamDataDragons
                     Console.WriteLine($"Loan: {Loan.LoanNumber} \nBalance: {Loan.BankLoan} \n────────");
                 }
             }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+            Console.ResetColor();
             Console.WriteLine($"Press Enter to return to menu");
             Console.ReadKey();
         }
@@ -82,9 +94,13 @@ namespace TeamDataDragons
             {
                 Console.Clear();
                 BankLogo.DragonBank();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("─── User information ────────────────────────────────────────────────────────────────────────\n");
+                Console.ResetColor();
                 PrintInfo();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("\n─── Bank Customer Menu ──────────────────────────────────────────────────────────────────────");
+                Console.ResetColor();
                 Console.WriteLine("Select option (1-9):\n");
                 Console.WriteLine("1. View bankaccounts and balance\n2. Transfer money between accounts\n" +
                     "3. Transfer money to other customers\n4. Open new account\n5. Savings\n6. View transfer log\n7. My Loans\n8. Apply for a loan\n9. Log out");
@@ -126,9 +142,12 @@ namespace TeamDataDragons
                         NewLoan.ApplyForALoan(accounts, loans);
                         break;
                     case 9:
+                        Console.Clear();
                         return;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid choice. Try again.");
+                        Console.ResetColor();
                         break;
                 }
             } 
