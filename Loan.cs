@@ -32,8 +32,9 @@ namespace TeamDataDragons
         //Method to apply for a loan, considering the customers balance and loan limits.
         public void ApplyForALoan(List<Account> accounts, List<Loan> loans)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("─── Apply for a Loan ────────────────────────────────────────────────────────────────────────\n");
-
+            Console.ResetColor();
             float currentBalance = 0;
 
             //Calculates the total balance of customers accounts.
@@ -47,7 +48,9 @@ namespace TeamDataDragons
             //Check if the customer is eligible for a loan.
             if (maximumLoan <= 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Your balance is to low to apply for a loan.");
+                Console.ResetColor();
             }
             else
             {
@@ -59,22 +62,31 @@ namespace TeamDataDragons
 
                 while (wrongInput)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"─── Wrong input, try again ───");
+                    Console.ResetColor();
                     wrongInput = !float.TryParse(Console.ReadLine(), out customerLoanApply);
                 }
 
                 //Check if the requested loan amount excees the maximum loan limit.
                 if (customerLoanApply > maximumLoan)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"You are applying over the maximum loan limit.\n" +
                         $"Your maximum loan amount is: {maximumLoan}");
+                    Console.ResetColor();
+
                 }
                 else
                 {
                     //Create a new Loan object and add it to the list of loans.
                     Loan newLoan = new Loan(customerLoanApply);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
                     Console.WriteLine($"Your bank loan of {customerLoanApply} is approved.");
                     loans.Add(newLoan);
                     //Generates a unique account number for the new loan aaccount.
@@ -85,8 +97,10 @@ namespace TeamDataDragons
                     accounts.Add(newLoanAccount);
                 }
             }
-            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────" +
-            "\nPress Enter to return to menu");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.ResetColor();
+            Console.WriteLine("Press Enter to return to menu");
             Console.ReadKey();
         }
         //Method to generate a unique account number for the new loan account.
