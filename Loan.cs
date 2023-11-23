@@ -49,12 +49,12 @@ namespace TeamDataDragons
             if (maximumLoan <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Your balance is to low to apply for a loan.");
+                Console.WriteLine("──── Your balance is to low to apply for a loan. ────");
                 Console.ResetColor();
             }
             else
             {
-                Console.WriteLine($"Your maximum loan amount is: {maximumLoan}\n" +
+                Console.WriteLine($"─ Your maximum loan amount is: {maximumLoan} ─\n\n" +
                 $"Enter the amount you want to apply for:");
 
                 //Check for valid input for the loan amount.
@@ -71,13 +71,11 @@ namespace TeamDataDragons
                 //Check if the requested loan amount excees the maximum loan limit.
                 if (customerLoanApply > maximumLoan)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
-                    Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n──── Lone has been denied ───\n");
+                    Console.ResetColor();
                     Console.WriteLine($"You are applying over the maximum loan limit.\n" +
                         $"Your maximum loan amount is: {maximumLoan}");
-                    Console.ResetColor();
 
                 }
                 else
@@ -85,9 +83,9 @@ namespace TeamDataDragons
                     //Create a new Loan object and add it to the list of loans.
                     Loan newLoan = new Loan(customerLoanApply);
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.WriteLine("\n─── Lone has ben approved ───\n");
                     Console.ResetColor();
-                    Console.WriteLine($"Your bank loan of {customerLoanApply} is approved.");
+                    Console.WriteLine($"loan of {customerLoanApply} SEK is approved.");
                     loans.Add(newLoan);
                     //Generates a unique account number for the new loan aaccount.
                     string loanAccountNumber = GenerateRandomAccountNumber();
@@ -98,7 +96,7 @@ namespace TeamDataDragons
                 }
             }
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────");
+            Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
             Console.ResetColor();
             Console.WriteLine("Press Enter to return to menu");
             Console.ReadKey();

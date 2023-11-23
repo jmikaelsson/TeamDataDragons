@@ -62,7 +62,7 @@ namespace TeamDataDragons
         public void AddCustomer(List<AbstractUser> bankUsers)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n─── Add new customer ────────────────────────────────────────────────────────────────────────\n");
+            Console.WriteLine("─── Add new customer ────────────────────────────────────────────────────────────────────────\n");
             Console.ResetColor();
             Console.Write("Enter customer name: ");
             string customerName = Console.ReadLine();
