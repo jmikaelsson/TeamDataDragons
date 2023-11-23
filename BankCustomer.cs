@@ -109,6 +109,7 @@ namespace TeamDataDragons
                         accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
+                        Savings saving = new();
                         saving.SavingMenu(accounts);
                         break;
                     case 6:
