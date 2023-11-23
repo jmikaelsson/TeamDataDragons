@@ -12,3 +12,6 @@ We created an abstract class called AbstractUser. In this class we have a method
 
 
 We added coloring to our design through out the code.
+
+
+UML länk: https://lucid.app/lucidchart/invitations/accept/inv_c2347e6b-2e33-4331-8893-936fe25adc59
