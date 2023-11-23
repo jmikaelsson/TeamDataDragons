@@ -30,8 +30,11 @@ namespace TeamDataDragons
             while (true)
             {
                 BankLogo.DragonBank();
-                Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n" +
-                    "1. Login \n2. Exit");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────\n");
+                Console.ResetColor();
+                Console.WriteLine("1. Login \n2. Exit");
+                Console.ResetColor();
                 string choise = Console.ReadLine();
                 switch (choise)
                 {
@@ -47,7 +50,9 @@ namespace TeamDataDragons
                     Console.Clear();
                     BankLogo.DragonBank();
                     Attempts++;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("─── Login ───────────────────────────────────────────────────────────────────────────────────");
+                    Console.ResetColor();
                     Console.Write("Username: ");
                     string inputUserName = Console.ReadLine();
                     Console.Write("Password: ");
@@ -71,16 +76,20 @@ namespace TeamDataDragons
                     else if (Attempts < MaxAttempts)
                     {
                         Console.WriteLine("\n──────────────────────────────\n");
-                        Console.WriteLine("Username or password is incorrect!" +
-                        "\nPress Enter to try again");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Username or password is incorrect!");
+                        Console.ResetColor();
+                        Console.WriteLine("\nPress Enter to try again");
                         Console.ReadKey();
                     }
                 }
                 if (Attempts >= MaxAttempts)
                 {
                     Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
-                    Console.WriteLine("Too many incorrect attempts..." +
-                        "\nPress Enter to exit");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Too many incorrect attempts");
+                    Console.ResetColor();
+                    Console.WriteLine("\nPress Enter to exit");
                     Console.ReadKey();
                     Environment.Exit(0);
                 }
