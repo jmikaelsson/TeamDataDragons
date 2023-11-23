@@ -109,9 +109,7 @@ namespace TeamDataDragons
                         accounts.Add(Account.AddNewAccount());
                         break;
                     case 5:
-                        Console.Clear();
-                        Savings savings = new();
-                        savings.SavingMenu(accounts);
+                        saving.SavingMenu(accounts);
                         break;
                     case 6:
                         Console.Clear();
