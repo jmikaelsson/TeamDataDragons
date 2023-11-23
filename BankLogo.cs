@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TeamDataDragons
 {
-    internal class BankLogo
+    internal static class BankLogo
     {
-        public void DragonBank()
+        public static void DragonBank()
         {
 
             Console.WriteLine(@"
