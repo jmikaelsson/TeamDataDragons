@@ -151,7 +151,7 @@ namespace TeamDataDragons
             string transferInfo = $"{amount} {UserCurrency} transferred from {BankAccountNumber} to {recipientAccount.BankAccountNumber}";
             transferLogs.Add(transferInfo);
 
-            Console.WriteLine($"Transfer successful. New balance for {BankAccountNumber}: {Balance}, New balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
+            Console.WriteLine($"\n─── Transfer successful. ─── \nNew balance for {BankAccountNumber}: {Balance} \nNew balance for {recipientAccount.BankAccountNumber}: {recipientAccount.Balance}");
             Console.ReadKey();
         }
 
@@ -184,7 +184,7 @@ namespace TeamDataDragons
             Console.WriteLine("Enter the amount to transfer:");
             if (!double.TryParse(Console.ReadLine(), out double transferAmount) || transferAmount <= 0)
             {
-                Console.WriteLine("Invalid transfer amount. Aborting operation.");
+                Console.WriteLine("─── Invalid transfer amount. Aborting operation. ───");
                 Console.ReadKey();
                 return;
             }

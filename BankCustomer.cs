@@ -126,6 +126,7 @@ namespace TeamDataDragons
                         NewLoan.ApplyForALoan(accounts, loans);
                         break;
                     case 9:
+                        Console.Clear();
                         return;
                     default:
                         Console.WriteLine("Invalid choice. Try again.");
