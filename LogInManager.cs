@@ -74,13 +74,15 @@ namespace TeamDataDragons
                         Console.ReadKey();
                     }
                 }
-                Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
-                Console.WriteLine("Too many incorrect attempts..." +
-                    "\nPress Enter to exit");
-                Console.ReadKey();
-                Environment.Exit(0);
+                if (Attempts >= MaxAttempts)
+                {
+                    Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
+                    Console.WriteLine("Too many incorrect attempts..." +
+                        "\nPress Enter to exit");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
             }
         }
-        
     }
 }
