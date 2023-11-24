@@ -37,7 +37,7 @@ namespace TeamDataDragons
             Console.ResetColor();
             if (accounts.Count == 0)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"─── There is no active accounts ───\n");
                 Console.ResetColor();
             }

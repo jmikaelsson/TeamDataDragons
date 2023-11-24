@@ -143,6 +143,12 @@ namespace TeamDataDragons
                     Console.ResetColor();
                 }
             }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("─── There are no savings accounts found. ───");
+                Console.ResetColor();
+            }
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
             Console.ResetColor();
