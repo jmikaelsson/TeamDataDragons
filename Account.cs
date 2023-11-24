@@ -327,7 +327,9 @@ namespace TeamDataDragons
             {
                 if (account.transferLogs.Count == 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"\n─── No transfer logs available for account {account.BankAccountNumber}. ───");
+                    Console.ResetColor();
                 }
                 else
                 {
@@ -335,14 +337,15 @@ namespace TeamDataDragons
                     foreach (var log in account.transferLogs)
                     {
                         Console.WriteLine(log);
+                        Console.WriteLine();
                     }
                 }
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("\n─────────────────────────────────────────────────────────────────────────────────────────────");
                 Console.ResetColor();
                 Console.WriteLine("Press enter to return to menu.");
                 Console.ReadKey();
-            }
         }
 
         private void SetInitialBalance(double initialBalance, CurrencyType currencyType)
